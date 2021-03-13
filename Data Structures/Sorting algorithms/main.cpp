@@ -5,18 +5,11 @@
 #include<queue>
 #include<algorithm>
 
-
-
 using namespace std;
 using namespace std::chrono;
 
-
 ifstream fin("input.in");
 ofstream fout("output.out");
-
-
-
-
 
 ///BUBBLESORT
 
@@ -24,16 +17,18 @@ vector<int> BubbleSort(vector<int> v, int n)
 {
     int i;
     bool ordo = false;
+
     while(!ordo)
     {
         ordo = true;
         for (i = 0; i < n-1 ; ++i)
             if (v[i] > v[i+1])
-                {
-                    swap(v[i], v[i+1]);
-                    ordo = false;
-                }
+            {
+                swap(v[i], v[i+1]);
+                ordo = false;
+            }
     }
+
     return v;
 
 }
