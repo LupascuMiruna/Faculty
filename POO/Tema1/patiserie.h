@@ -8,100 +8,158 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include "produs.h"
+#include "personal.h"
 using namespace std;
-
 
 
 class patiserie
     {
-
+        static int nr_patisrii;
         string nume;
         string locatie;
         int suprafata;
+        int nr_produse = 0;
+        int nr_angajati = 0;
         bool state; //daca e deschis sau nu, initial deschise toate
         vector <produs> produse;
-        //produs prod1;/////////////
-
-        //personal pers;
-
+        vector <personal> angajati;
 
         public:
         //constructor
-        patiserie(){}
-        patiserie(string nume, string locatie, int suprafata)
-        {
-            this->nume = nume;
-            this->locatie = locatie;
-            this->suprafata = suprafata;
-        }
+        patiserie();
+        patiserie(string nume, string locatie, int suprafata);
+
         //destructor
-        ~patiserie(){}
+        ~patiserie();
 
         //constructor de copiere
         patiserie(const patiserie &p);
 
         //operator =
-        patiserie operator=(const patiserie &p)
-        {
-            nume = p.nume;
-            locatie = p.locatie;
-            suprafata = p.suprafata;
-            state = p.state;
-            produse = p.produse;
+        patiserie &operator=(const patiserie &p);
 
-            return *this;
-        }
+        ///functii pe produse
+        void adauga_produs(produs prod);
+        void afiseaza_produse();
 
-        void open_shop()
-        {this->state = 1;}
-
-        void close_shop()
-        {this->state = 0;}
+        ///functii pe personal
+        void adauga_personal(personal pers);
+        void afiseaza_personal();
 
 
-        void if_open()
-        {
-            if (this->state == 1)
-                cout <<"open";
-            else
-                cout << "close";
-        }
+        ///functii pe patiserie
+        void open_shop();
+        void close_shop();
+        void if_open();
+        int get_suprafata();
 
-        void adauga_produs(string prod)
-        {
-            this->produs.push_back(prod);
-
-        }
-        void afiseaza_produse()
-        {
-            int i;
-            for(i = 0; i < this->produse.size(); ++i)
-                cout << this->produse[i] <<", "
-
-        }
-        void get_suprafata()
-        {
-            return this->suprafata;
-        }
         ///supraincarcarea >> declarat mai jos
         friend istream &operator>>(istream &fin, patiserie &P);
         friend ostream &operator<<(ostream &fout,const patiserie &P);
 
     };
+///constructor
+patiserie::patiserie()
+{
+    this->state = 1;
+}
+patiserie::patiserie(string nume, string locatie, int suprafata)
+{
+    this->nume = nume;
+    this->locatie = locatie;
+    this->suprafata = suprafata;
+    this->state = 1;
+}
 
-    istream &operator >>(istream &fin, patiserie &P)
-    {
-        fin >> P.nume >> P.locatie >> P.suprafata;
+///destructor
+patiserie::~patiserie()
+{
+    //cout <<"Patiseria " << this->nume <<" din "<< this->locatie << " a fost desfiintata." <<"\n";
+}
 
-    }
-    ostream &operator<<(ostream &fout,const patiserie &P)
-    {
-        fout <<"Patiseria: "<< P.nume <<"\n" <<" din "<<P.locatie <<" are urmatoarele produse: ";
-        for(int i = 0; i < P.produse.size(); i++)
-            fout <<P.produse[i] <<" ";
 
-    }
+patiserie &patiserie::operator=(const patiserie &p)
+{
+    this->nume = p.nume;
+    this->locatie = p.locatie;
+    this->suprafata = p.suprafata;
+    this->state = p.state;
+    //this->produse = p.produse;
 
+    return *this;
+}
+
+///functii pe produse
+void patiserie::adauga_produs(produs prod)
+{
+    this->nr_produse += 1;
+    this->produse.push_back(prod);
+
+}
+
+void patiserie::afiseaza_produse()
+{
+    int i;
+    cout <<"Patiseria "<< this->nume <<" are urmatoarele produse:\n";
+    for (i = 0; i < this->produse.size(); ++i)
+        cout << this->produse[i];
+    cout <<"\n";
+
+}
+
+/// functii pe personal
+void patiserie::adauga_personal(personal pers)
+{
+    this->nr_angajati += 1;
+    this->angajati.push_back(pers);
+}
+void patiserie::afiseaza_personal()
+{
+    cout <<"Patiseria "<< this->nume <<" din " << this->locatie <<" are urmatorii angajati:\n";
+    for (int i = 0; i < this->angajati.size(); ++i)
+        cout <<this->angajati[i] <<" ";
+}
+
+
+void patiserie::open_shop()
+{this->state = 1;}
+
+void patiserie::close_shop()
+{this->state = 0;}
+
+void patiserie::if_open()
+{
+    if (this->state == 1)
+        cout<<"Patiseria " << this->nume <<" din "<< this->locatie <<": OPEN :)" <<"\n";
+    else
+        cout<<"Patiseria " << this->nume <<" din "<< this->locatie <<": CLOSE :(" <<"\n";
+}
+
+
+int patiserie::get_suprafata()
+{
+    return this->suprafata;
+}
+
+
+istream& operator>> (istream &cin,  patiserie &P)
+{
+    cin >> P.nume >> P.locatie >> P.suprafata;
+    P.state = 1;
+    return cin;
+
+}
+
+ostream& operator<< (ostream &cout, const patiserie &P)
+{
+
+    cout <<"Patiseria: "<< P.nume <<" din "<<P.locatie <<" are urmatoarele produse: \n";
+    for (int i = 0; i < P.produse.size(); ++i)
+        cout << P.produse[i];
+
+    return cout;
+}
 
 #endif //INCERCARE1_PATISERIE_H

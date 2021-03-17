@@ -7,7 +7,10 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
 using namespace std;
+
+
 
 class produs
 {
@@ -20,58 +23,107 @@ class produs
 
 public:
     //constructor
-    produs(){}
-    produs(string tip)
-    {
-        this->tip = tip;
+    produs();
+    produs(string tip, int gramaj);
 
-        //ingrediente = new int[];
-
-    }
     //destructor
-    ~produs(){}
+    ~produs();
     ///~produs(){ delete[]ingrediente;}
     //copy constructor
-    produs(const produs& produs1)
-    {
-        this->data_expir = produs1.data_expir;
-        this->tip = produs1.tip;
-        this->gramaj = produs1.gramaj;
-        this->redus = produs1.redus;
-        this->pret = produs1.pret;
-        ////////////////////////////////////////////////////////// cum copiez ingrediente
+    produs(const produs& produs1);
 
-    }
     //operator de atribuire
-    produs operator=(const produs &produs1)
-    {
-        this->redus = produs1.redus;
-        this->gramaj = produs1.gramaj;
-        this->tip = produs1.tip;
-        this->data_expir = produs1.data_expir;
+    produs &operator=(const produs &produs1);
 
-        return *this;
-    }
-    void modifica_gramaj(int x) //cu + daca se mareste, cu  - daca se micsoreaza
-    {
-        this->gramaj += x;
-    }
-    void aplica_reducere(int x)
-    {
-        this->pret = this->pret - (this->redus/100) * pret;
-    }
-    void adauga_ingredient()
-    {
+    void modifica_gramaj(int x) ;//cu + daca se mareste, cu  - daca se micsoreaza
 
-    }
+    void aplica_reducere(int x);
 
-    //geteri
+    void adauga_ingredient();
+    ///setteri
+    void set_reducere(int x);
+
+    ///geteri
+    int get_gramaj();
+
+    //supraincarcare <<
+    friend ostream& operator<< (ostream &cout, const produs &prod);
+
+
+
     ///sa afisam lista de ingrediente
-
-    //seteri
 
 
 
 };
+
+///constructori
+produs::produs(){}
+produs::produs(string tip, int gramaj)
+{
+    this->tip = tip;
+    this->gramaj = gramaj;
+
+//ingrediente = new int[];
+
+}
+
+///destrctori
+produs::~produs()
+{
+    //cout <<"Produsul " << this->tip <<" nu mai exista" <<"\n";
+
+}
+
+produs &produs::operator=(const produs& produs1)
+{
+    this->data_expir = produs1.data_expir;
+    this->tip = produs1.tip;
+    this->gramaj = produs1.gramaj;
+    this->redus = produs1.redus;
+    this->pret = produs1.pret;
+////////////////////////////////////////////////////////// cum copiez ingrediente
+    return *this;
+}
+
+produs::produs(const produs &produs1)
+{
+    this->pret = produs1.pret;
+    this->redus = produs1.redus;
+    this->gramaj = produs1.gramaj;
+    this->tip = produs1.tip;
+    this->data_expir = produs1.data_expir;
+
+}
+
+void produs::modifica_gramaj(int x) //cu + daca se mareste, cu  - daca se micsoreaza
+{
+    this->gramaj += x;
+}
+
+void produs::aplica_reducere(int x)
+{
+    this->pret = this->pret - (this->redus/100) * pret;
+}
+///seteri
+void produs::set_reducere(int x)
+{
+    this->redus = x;
+}
+
+///geteri
+int produs::get_gramaj()
+{
+    return this->gramaj;
+}
+//
+ostream& operator<< (ostream &cout, const produs &prod)
+{
+
+    cout << prod.tip << " " << prod.gramaj <<"\n";
+
+    return cout;
+}
+
 
 #endif //INCERCARE1_PRODUS_H

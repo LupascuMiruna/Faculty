@@ -12,4 +12,4 @@
 #include "produs.h"
 using namespace std;
 
-#endif //INCERCARE1_PATISERIE_H
+//#endif //INCERCARE1_PATISERIE_H
