@@ -3,4 +3,8 @@ project(incercare1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(incercare1 main.cpp)
+add_executable(incercare1 main.cpp
+        patiserie.cpp
+        produs.cpp
+        personal.cpp
+        )
