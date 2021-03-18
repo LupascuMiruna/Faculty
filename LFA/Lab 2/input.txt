@@ -1,0 +1,31 @@
+#
+# comment lines ( skip them )
+#
+Sigma:
+    a
+    b
+End
+#
+# comment l i n e s ( s k i p them )
+#
+States:
+    S, S
+    B+, F
+    A1, F
+    A2
+    A3+, F
+End
+#
+# comment l i n e s ( s k i p them )
+#
+Transitions:
+   S, a, A1
+   S, b, B+
+   B+, b, B+
+   B+, a, A1
+   A1, b, A1
+   A1, a, A2
+   A2, a, A3+
+   A3+, a, A3+
+   A3+, b, A3+
+End
