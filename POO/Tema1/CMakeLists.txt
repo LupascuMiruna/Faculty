@@ -7,4 +7,6 @@ add_executable(incercare1 main.cpp
         patiserie.cpp
         produs.cpp
         personal.cpp
+        input.txt
+        output.txt
         )

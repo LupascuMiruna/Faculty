@@ -16,7 +16,7 @@ using namespace std;
 
 class patiserie
     {
-        static int nr_patisrii;
+        static int nr_patiserii;
         string nume;
         string locatie;
         int suprafata;
@@ -55,8 +55,8 @@ class patiserie
         int get_suprafata();
 
         ///supraincarcarea >> declarat mai jos
-        friend istream &operator>>(istream &cin, patiserie &P);
-        friend ostream &operator<<(ostream &cout,const patiserie &P);
+        friend istream &operator>>(istream &in, patiserie &P);
+        friend ostream &operator<<(ostream &out,const patiserie &P);
 
         ///setteri
         void set_nume(string new_nume);

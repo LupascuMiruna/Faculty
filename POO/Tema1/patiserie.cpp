@@ -111,22 +111,22 @@ int patiserie::get_suprafata()
 }
 
 
-istream& operator>> (istream &cin,  patiserie &P)
+istream& operator>> (istream &in,  patiserie &P)
 {
-    cin >> P.nume >> P.locatie >> P.suprafata;
+    in >> P.nume >> P.locatie >> P.suprafata;
     P.state = 1;
-    return cin;
+    return in;
 
 }
 
-ostream& operator<< (ostream &cout, const patiserie &P)
+ostream& operator<< (ostream &out, const patiserie &P)
 {
 
-    cout <<"Patiseria: "<< P.nume <<" din "<<P.locatie <<" are urmatoarele produse: \n";
+    out <<"Patiseria: "<< P.nume <<" din "<<P.locatie <<" are urmatoarele produse: \n";
     for (int i = 0; i < P.produse.size(); ++i)
-        cout << P.produse[i];
+        out << P.produse[i];
 
-    return cout;
+    return out;
 }
 
 ///setteri

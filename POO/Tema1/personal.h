@@ -21,16 +21,27 @@ class personal
             ///constructori
             personal();
             personal(string nume, int varsta, string post);
+            ///destructori
+            ~personal();
+            ///copy constructor
+            personal(const personal& pers);
+            ///operator =
+            personal &operator=(const personal &personal);
 
             ///setteri, getteri
             string get_nume();
+            string get_post();
+            int get_vechime();
             void set_nume(string new_nume);
             void set_post(string new_post);
             void set_vechime(int new_vechime);
 
             ///supraincarcare operatori
-            friend ostream &operator<<(ostream &cout, const personal &persoana);
-            friend istream &operator>>(istream &cin, personal &persoana);
+            friend ostream &operator<<(ostream &out, const personal &persoana);
+            friend istream &operator>>(istream &in, personal &persoana);
+
+            void schimba_post(string new_post);
+            void adauga_vechime();
 
         };
 

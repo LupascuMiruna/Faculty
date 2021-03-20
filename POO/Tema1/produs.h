@@ -16,8 +16,8 @@ class produs
 {
     string tip; //amandina, cozonac...
     int gramaj;
-    int redus;
-    int pret;
+    double redus;
+    double pret;
     vector <string> ingrediente;
     string data_expir;
 
@@ -28,8 +28,8 @@ public:
 
     //destructor
     ~produs();
-    ///~produs(){ delete[]ingrediente;}
-    //copy constructor
+
+    ///copy constructor
     produs(const produs& produs1);
 
     //operator de atribuire
@@ -41,16 +41,20 @@ public:
 
     void adauga_ingredient();
     ///setteri
-    void set_reducere(int x);
-    void set_pret(int x);
+    void set_reducere(double x);
+    void set_pret(double x);
+    void set_tip(string new_tip);
+    void set_gramaj(int new_gramaj);
+
 
     ///geteri
     int get_gramaj();
-    int get_pret();
+    double get_pret();
+    string get_tip();
 
-    //supraincarcare << >>
-    friend ostream& operator<< (ostream &cout, const produs &prod);
-    friend istream& operator>>(istream &cin, produs &prod);
+    ///supraincarcare << >>
+    friend ostream& operator<< (ostream &out, const produs &prod);
+    friend istream& operator>>(istream &in, produs &prod);
 
     ///sa afisam lista de ingrediente
 

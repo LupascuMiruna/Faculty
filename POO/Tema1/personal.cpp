@@ -11,6 +11,15 @@ personal::personal()
     this->vechime = 0;
 }
 
+///copy constructor --- chiar daca nu l folosim
+personal::personal(const personal& pers)
+{
+    this->nume = pers.nume;
+    this->varsta = pers.varsta;
+    this->post = pers.post;
+    this->vechime = pers.vechime;
+}
+
 personal::personal(string nume, int varsta, string post)
 {
     this->nume = nume;
@@ -19,11 +28,37 @@ personal::personal(string nume, int varsta, string post)
     this->vechime = 0;
 }
 
+///destructori
+personal::~personal()
+{
+    ///cout << "persoana "<< this->nume <<" a fost concediata";
 
+}
+///operator =
+personal &personal::operator=(const personal& pers)
+{
+    this->nume = pers.nume;
+    this->varsta = pers.varsta;
+    this->post = pers.post;
+    this->vechime = pers.vechime;
+    return *this;
+}
+
+///getteri
 string personal::get_nume()
 {
     return this->nume;
 }
+string personal::get_post()
+{
+    return this->post;
+}
+int personal::get_vechime()
+{
+    return this->vechime;
+}
+
+//setteri
 void personal::set_post(string new_post)
 {
     this->post = new_post;
@@ -38,15 +73,22 @@ void personal::set_nume(string new_nume)
     this->nume = new_nume;
 }
 
-ostream& operator<< (ostream &cout, const personal &persoana)
+ostream& operator<< (ostream &out, const personal &persoana)
 {
-    cout << persoana.nume <<" este "<< persoana.post <<" si are o vechime de "<< persoana.vechime <<"\n";
-    return cout;
+    out << persoana.nume <<" este "<< persoana.post <<" si are o vechime de "<< persoana.vechime <<"\n";
+    return out;
 }
-istream& operator>> (istream &cin, personal &persoana)
+istream& operator>> (istream &in, personal &persoana)
 {
-    cin >> persoana.nume >> persoana.post;
-    return cin;
+    in >> persoana.nume >> persoana.post;
+    return in;
 }
 
-
+void personal::schimba_post(string new_post)
+{
+    this->post = new_post;
+}
+void personal::adauga_vechime()
+{
+    this->vechime = this->vechime + 1;
+}

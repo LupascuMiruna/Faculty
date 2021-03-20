@@ -55,37 +55,52 @@ void produs::modifica_gramaj(int x) //cu + daca se mareste, cu  - daca se micsor
 
 void produs::aplica_reducere()
 {
-    this->pret = this->pret - (this->redus/100) * pret;
+    double reducere = (this->redus/100) * this->pret;
+
+    this->pret = this->pret - reducere;
 }
 ///seteri
-void produs::set_reducere(int x)
+void produs::set_reducere(double x)
 {
     this->redus = x;
 }
-void produs::set_pret(int x)
+void produs::set_pret(double x)
 {
     this->pret = x;
 }
 
+void produs::set_tip(string new_tip)
+{
+    this->tip = new_tip;
+}
+void produs::set_gramaj(int new_gramaj)
+{
+    this->gramaj = new_gramaj;
+}
+
 ///geteri
+string produs::get_tip()
+{
+    return this->tip;
+}
 int produs::get_gramaj()
 {
     return this->gramaj;
 }
-int produs::get_pret()
+double produs::get_pret()
 {
     return this->pret;
 }
 /// >> <<
-ostream& operator<< (ostream &cout, const produs &prod)
+ostream& operator<< (ostream &out, const produs &prod)
 {
-    cout << prod.tip << " " << prod.gramaj <<"\n";
-    return cout;
+    out << prod.tip << " " << prod.pret <<"\n";
+    return out;
 }
 
-istream& operator>>(istream &cin, produs &prod)
+istream& operator>>(istream &in, produs &prod)
 {
-    cin >> prod.tip >> prod.gramaj;
-    return cin;
+    in >> prod.tip >> prod.gramaj;
+    return in;
 }
 
