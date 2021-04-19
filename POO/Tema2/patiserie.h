@@ -5,7 +5,6 @@
 #ifndef INCERCARE1_PATISERIE_H
 #define INCERCARE1_PATISERIE_H
 
-#include <string>
 #include <iostream>
 #include <vector>
 
@@ -17,11 +16,9 @@ using namespace std;
 class patiserie
     {
 
-        string nume;
-        string locatie;
+        std::string nume;
+        std::string locatie;
         int suprafata;
-        int nr_produse = 0;
-        int nr_angajati = 0;
         bool state; //daca e deschis sau nu, initial deschise toate
         vector <produs> produse;
         vector <personal> angajati;
@@ -29,7 +26,7 @@ class patiserie
         public:
         //constructor
         patiserie();
-        patiserie(string nume, string locatie, int suprafata);
+        patiserie(std::string nume, string locatie, int suprafata);
 
         //destructor
         ~patiserie();
@@ -51,16 +48,16 @@ class patiserie
         ///functii pe patiserie
         void open_shop();
         void close_shop();
-        void if_open();
+        void check_status();
         int get_suprafata();
 
         ///supraincarcarea >> declarat mai jos
-        friend istream &operator>>(istream &in, patiserie &P);
-        friend ostream &operator<<(ostream &out,const patiserie &P);
+        friend istream &operator>>(std::istream &in, patiserie &P);
+        friend ostream &operator<<(std::ostream &out,const patiserie &P);
 
         ///setteri
-        void set_nume(string new_nume);
-        void set_locatie(string new_locatie);
+        void set_nume(std::string new_nume);
+        void set_locatie(std::string new_locatie);
 
     };
 

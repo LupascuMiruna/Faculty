@@ -39,8 +39,7 @@ patiserie::patiserie(const patiserie &p)
     this->state = p.state;
     this->produse = p.produse;
     this->angajati = p.angajati;
-    this->nr_angajati = p.nr_angajati;
-    this->nr_produse = p.nr_produse;
+
 
 }
 
@@ -52,8 +51,6 @@ patiserie &patiserie::operator=(const patiserie &p)
     this->state = p.state;
     this->produse = p.produse;
     this->angajati = p.angajati;
-    this->nr_angajati = p.nr_angajati;
-    this->nr_produse = p.nr_produse;
 
     return *this;
 }
@@ -61,7 +58,6 @@ patiserie &patiserie::operator=(const patiserie &p)
 ///functii pe produse
 void patiserie::adauga_produs(produs prod)
 {
-    this->nr_produse += 1;
     this->produse.push_back(prod);
 
 }
@@ -79,7 +75,6 @@ void patiserie::afiseaza_produse()
 /// functii pe personal
 void patiserie::adauga_personal(personal pers)
 {
-    this->nr_angajati += 1;
     this->angajati.push_back(pers);
 }
 void patiserie::afiseaza_personal()
@@ -96,7 +91,7 @@ void patiserie::open_shop()
 void patiserie::close_shop()
 {this->state = 0;}
 
-void patiserie::if_open()
+void patiserie::check_status()
 {
     if (this->state == 1)
         cout<<"Patiseria " << this->nume <<" din "<< this->locatie <<": OPEN :)" <<"\n";

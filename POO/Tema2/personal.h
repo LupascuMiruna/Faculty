@@ -13,7 +13,7 @@ using namespace std;
 class personal
         {
         protected:
-            string nume;
+            std::string nume;
             int an_nastere;
             int vechime;
             //int salariu;
@@ -21,7 +21,7 @@ class personal
         public:
             ///constructori
             personal();
-            personal(string nume, int an_nastere, int vechime);
+            personal(std::string nume, int an_nastere, int vechime);
             ///destructor virtual
             virtual ~personal();
             ///copy constructor
@@ -32,7 +32,7 @@ class personal
             ///setteri, getteri
             string get_nume();
             int get_vechime();
-            void set_nume(string new_nume);
+            void set_nume(std::string new_nume);
             void set_an_nastere(int new_an_nastere);
             void adauga_vechime();
 
@@ -41,8 +41,8 @@ class personal
 
 
             ///supraincarcare operatori
-            friend ostream &operator<<(ostream &out, const personal &persoana);
-            friend istream &operator>>(istream &in, personal &persoana);
+            friend ostream &operator<<(std::ostream &out, const personal &persoana);
+            friend istream &operator>>(std::istream &in, personal &persoana);
 
 
         };

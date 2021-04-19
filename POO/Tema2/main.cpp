@@ -17,7 +17,7 @@
 ///persoanl: manager sau....
 
 using namespace std;
-
+////exceptia
 class gramaj_exception: public exception {
 public:
     const char* what() const noexcept override ///suprascriem functia care returneaza mesajul exceptiei
@@ -32,6 +32,16 @@ int main()
 {
     ifstream fin("input.txt");
     ofstream fout("output.txt");
+/// TEMA 1
+//TIP INPUT:
+//    Luca
+//    Tineretului
+//    3000
+//    savarina
+//    200
+//    Adelina
+//    casier
+
 
 //    ///adauga lista de produse l o patiserie
 //    patiserie P1;
@@ -92,20 +102,29 @@ int main()
 //    P3.if_open();
 //    P3.close_shop();
 //    P3.if_open();
+////SFARSIT TEMA 1
 
-
-
+////TEMA 2
     ///MOSTENIRE DIAMANT
-    reprezentant p1("a",2, 2,"d",3,"intern");
-    p1.print_salariu();
+    reprezentant reprez1("Bob",1996, 2,"contabilitate",3,"national");
+    cout << "Angajatul " << reprez1.get_nume() <<" are salariul de ";
+    reprez1.print_salariu();
     cout << "\n";
-    cout << p1.get_nume() << "\n";
+
 
     ///SMART POINTERS
-    shared_ptr<placinta> pmere(new placinta("dulce", "mere", 100, 2));
+    shared_ptr<placinta> pmere = make_shared<placinta>("dulce", "mere", 100, 2);
     ////FUNCTIE VIRTUALA PENTRU MODIFICARE PRET
     pmere->set_pret(1);
-    cout << pmere->get_pret() << "\n";
+    cout <<"Produsul costa " << pmere->get_pret() << "\n";
+
+
+    ///VECTORI DE SMART POINTERS
+    vector<shared_ptr<patiserie>> vecpatiserie;
+    vecpatiserie.emplace_back(make_shared<patiserie>("Dulcelind","Iasi",3000));
+    vecpatiserie.emplace_back(make_shared<patiserie>("Dulcelind","Vaslui",2000));
+
+
 
     placinta pbranza("dulce", "branza", 200, 3);
     ///EXCEPTIE PENTRU GRAMAJ

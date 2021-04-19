@@ -15,17 +15,16 @@ using namespace std;
 class produs
 {
 protected:
-    string tip; //dulce/sarat
+    std::string tip; //dulce/sarat
     int gramaj;
     double redus;
     double pret;
-    vector <string> ingrediente;
-    string data_expir;
+    std::string data_expir;
 
 public:
     //constructor
     produs();
-    produs(string tip, int gramaj);
+    produs(std::string tip, int gramaj);
 
     ///destructor virtual
     virtual ~produs();
@@ -44,7 +43,7 @@ public:
     ///setteri
     void set_reducere(double x);
     virtual void set_pret(double x);
-    void set_tip(string new_tip);
+    void set_tip(std::string new_tip);
     void set_gramaj(int new_gramaj);
 
 
@@ -54,12 +53,10 @@ public:
     string get_tip();
 
     ///supraincarcare << >>
-    friend ostream& operator<< (ostream &out, const produs &prod);
-    friend istream& operator>>(istream &in, produs &prod);
+    friend ostream& operator<< (std::ostream &out, const produs &prod);
+    friend istream& operator>>(std::istream &in, produs &prod);
 
     ///sa afisam lista de ingrediente
-
-
 
 };
 

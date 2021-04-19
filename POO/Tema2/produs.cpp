@@ -34,7 +34,6 @@ produs &produs::operator=(const produs& produs1)
     this->gramaj = produs1.gramaj;
     this->redus = produs1.redus;
     this->pret = produs1.pret;
-////////////////////////////////////////////////////////// cum copiez ingrediente
     return *this;
 }
 
