@@ -11,20 +11,17 @@
 #include "reprezentant.h"
 #include "manager.h"
 #include "gramaj_exception.h"
+#include "pret_exception.h"
+#include "tip_exception.h"
 
 ///reprezentat: manager+experimentat
 ///personal: experimenta sau novice
 ///persoanl: manager sau....
 
 using namespace std;
-////exceptia
-class gramaj_exception: public exception {
-public:
-    const char* what() const noexcept override ///suprascriem functia care returneaza mesajul exceptiei
-    {
-        return "Gramajul este necorespunzator!!!!";
-    }
-};
+
+
+
 
 
 int main()
@@ -127,19 +124,36 @@ int main()
 
 
     placinta pbranza("dulce", "branza", 200, 3);
-    ///EXCEPTIE PENTRU GRAMAJ
+    ///EXCEPTIE PENTRU GRAMAJ / pret /tip
     try
     {
-        int new_gramaj;
+        int new_gramaj, new_pret;
+        string new_tip;
+
+        fin >> new_tip;
         fin >> new_gramaj;
-        if(new_gramaj > 500 || new_gramaj < 100)
-            throw gramaj_exception();
-        pbranza.modifica_gramaj(new_gramaj);
+        fin >> new_pret;
+
+        pbranza.modifica_produs(new_gramaj, new_pret, new_tip);
+
     }
-    catch(const exception& e)
+    catch(tip_exception& e)
     {
         cout << e.what() << endl;
     }
+    catch(pret_exception& e)
+    {
+        cout << e.what() << endl;
+    }
+
+    catch(gramaj_exception& e)
+    {
+        cout << e.what() << endl;
+
+    }
+
+    cout << pbranza.get_tip() << " " << pbranza.get_pret() << " " << pbranza.get_gramaj();
+
 
 
 

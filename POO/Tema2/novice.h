@@ -12,6 +12,6 @@ protected:
         string mentor;
         public:
             novice(string nume, int an_nastere, int vechime, string mentor);
-            void print_salariu();
+            void print_salariu()override;
         };
 #endif //INCERCARE1_NOVICE_H

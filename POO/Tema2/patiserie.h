@@ -20,8 +20,8 @@ class patiserie
         std::string locatie;
         int suprafata;
         bool state; //daca e deschis sau nu, initial deschise toate
-        vector <produs> produse;
-        vector <personal> angajati;
+        vector <produs*> produse;
+        vector <personal*> angajati;
 
         public:
         //constructor
@@ -38,11 +38,11 @@ class patiserie
         patiserie &operator=(const patiserie &p);
 
         ///functii pe produse
-        void adauga_produs(produs prod);
+        void adauga_produs(produs* prod);
         void afiseaza_produse();
 
         ///functii pe personal
-        void adauga_personal(personal pers);
+        void adauga_personal(personal* pers);
         void afiseaza_personal();
 
         ///functii pe patiserie

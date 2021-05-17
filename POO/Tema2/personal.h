@@ -37,7 +37,7 @@ class personal
             void adauga_vechime();
 
             ///functie pentru salariu
-            void print_salariu();
+            virtual void print_salariu();
 
 
             ///supraincarcare operatori

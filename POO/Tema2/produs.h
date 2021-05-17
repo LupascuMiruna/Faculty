@@ -36,6 +36,7 @@ public:
     produs &operator=(const produs &produs1);
 
     void modifica_gramaj(int x) ;//cu + daca se mareste, cu  - daca se micsoreaza
+    void modifica_produs(int new_gramaj, int new_pret, string new_tip);
 
     void aplica_reducere();
 

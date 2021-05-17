@@ -8,6 +8,9 @@
 #include<fstream>
 #include <vector>
 #include "produs.h"
+#include "gramaj_exception.h"
+#include "pret_exception.h"
+#include "tip_exception.h"
 using namespace std;
 ///constructori
 produs::produs(){}
@@ -44,6 +47,23 @@ produs::produs(const produs &produs1)
     this->gramaj = produs1.gramaj;
     this->tip = produs1.tip;
     this->data_expir = produs1.data_expir;
+
+}
+
+void produs::modifica_produs(int new_gramaj, int new_pret, string new_tip)
+{
+    for(int i = 0; i < new_tip.length(); ++i)
+        if(new_tip[i] < 'a' || new_tip[i] > 'z')
+            throw tip_exception();
+        else this->set_pret(new_pret);
+
+    if(new_gramaj > 500 )
+        throw gramaj_exception();
+    else this->set_gramaj(new_gramaj);
+
+    if(new_pret > 10 || new_pret < 3)
+        throw pret_exception();
+    else this->set_pret(new_pret);
 
 }
 

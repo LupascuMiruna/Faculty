@@ -56,7 +56,7 @@ patiserie &patiserie::operator=(const patiserie &p)
 }
 
 ///functii pe produse
-void patiserie::adauga_produs(produs prod)
+void patiserie::adauga_produs(produs* prod)
 {
     this->produse.push_back(prod);
 
@@ -73,7 +73,7 @@ void patiserie::afiseaza_produse()
 }
 
 /// functii pe personal
-void patiserie::adauga_personal(personal pers)
+void patiserie::adauga_personal(personal *pers)
 {
     this->angajati.push_back(pers);
 }
