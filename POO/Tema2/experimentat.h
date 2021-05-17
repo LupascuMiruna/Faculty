@@ -10,7 +10,7 @@ class experimentat: virtual public personal{
         string domeniu;
     public:
         experimentat(string nume, int an_nastere, int vechime, string domeniu);
-        void print_salariu()override;
+        void print_salariu() const override ;
 
 };
 

@@ -4,7 +4,7 @@
 #include<string>
 #include "novice.h"
 using namespace std;
-void novice::print_salariu() {
+void novice::print_salariu()const {
     cout << vechime * 100;
 }
 novice::novice(string nume, int an_nastere, int vechime, string mentor):

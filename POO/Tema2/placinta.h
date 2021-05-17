@@ -13,7 +13,7 @@ class placinta: public produs {
 
 
     public:
-        void set_pret(double x);
+        void set_pret(double x) override;
         placinta(string tip, string umplutura, int gramaj, double pret_unitar);
 
 };

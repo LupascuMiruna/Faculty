@@ -70,6 +70,6 @@ istream& operator>> (istream &in, personal &persoana)
     return in;
 }
 ///functie pentru salariu
-void personal::print_salariu() {
+void personal::print_salariu()const {
     cout<<"salariul nu a fost stabilit";
 }
