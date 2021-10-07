@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+    <meta name="keywords" content="caine, pisica, petshop">
+    <meta name="description" content="Pet Shop. Animalute, mancare si accesorii">
+    <title>PetMania</title>
+    <%- include("../fragmente/head") %>
+</head>
+
+<body>
+    <%- include("../fragmente/header") %>
+
+    <div>
+        <article class="animal">
+
+
+                <article class="animal">
+                        <h3 class="nume">
+                                Nume: <%- locals.animal.nume%>
+                        </h3>
+                        <div class="info-prod1">
+                                <figure>
+                                        <img src="/images/online_shop/<%- locals.animal.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- locals.animal.nume %>]" />
+                                    </figure>
+                                <p class="pret">Pret:<%- locals.animal.pret%></p>
+                                <p class="culoare">Culoare: <%- locals.animal.culoare%></p>
+                                <p class="temperament">Temperament:<%- locals.animal.temperament%></p>
+                                <p class="data">Data adaugare: <%- locals.animal.data_adaugare%></p>
+                            </div>
+                        <div class="info-prod2">
+                                <p class="temperament">Tip: <%- locals.animal.tip%></p>
+                                <p class="talie">Talie: <%- locals.animal.talie%></p>
+                       
+                        </div>
+                    </article>
+
+
+
+            
+            
+            
+        </article>
+    </div>
+    
+
+    <%- include("../fragmente/footer") %>
+</body>
+
+</html>

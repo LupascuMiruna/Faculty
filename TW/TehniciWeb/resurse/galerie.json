@@ -1,0 +1,295 @@
+{
+    "cale_galerie": "./resurse/images/galerie",
+    "imagini": [
+        {
+            "cale_imagine": "imagine1.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine12.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine13.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine14.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine15.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine16.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine17.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine18.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine19.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine110.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+        {
+            "cale_imagine": "imagine111.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "1"
+        },
+       
+        {
+            "cale_imagine": "imagine2.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine21.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine22.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine23.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine24.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine25.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine26.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine27.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine28.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine29.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine210.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine211.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "2"
+        },
+        {
+            "cale_imagine": "imagine3.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine31.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine32.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine33.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine34.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine35.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine36.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine37.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine38.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine39.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine310.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine311.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "3"
+        },
+        {
+            "cale_imagine": "imagine4.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine41.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine42.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine43.png",
+            "titlu": "Nume imagine",
+            "descriere": " Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine44.png",
+            "titlu": "Nume imagine",
+            "descriere": "creator: sonstroem, sursa: https://www.flickr.com/photos/96964826@N05/16540146562",
+            "sfert_ora": "4",
+            "license_data":{
+                "creator": "sonstroem",
+                "title": "Pet Dog",
+                "source": "https://www.flickr.com/photos/96964826@N05/16540146562",
+                "license":"https://creativecommons.org/licenses/by/2.0/?fbclid=IwAR02https://creativecommons.org/licenses/by/2.0/6q_RZgdlM87ZPzcGcG4bGmwnJtClCXVcPd0C450vhZMjoPE43mjQSPM"
+            }
+        },
+       
+        {
+            "cale_imagine": "imagine45.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine46.png",
+            "titlu": "Nume imagine",
+            "descriere": " Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine47.png",
+            "titlu": "Nume imagine",
+            "descriere": " Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine48.png",
+            "titlu": "Nume imagine",
+            "descriere": " Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine49.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine410.png",
+            "titlu": "Nume imagine",
+            "descriere": "Animalut",
+            "sfert_ora": "4"
+        },
+        {
+            "cale_imagine": "imagine411.png",
+            "titlu": "Nume imagine",
+            "descriere": " Animalut",
+            "sfert_ora": "4"
+        }
+    ]
+}

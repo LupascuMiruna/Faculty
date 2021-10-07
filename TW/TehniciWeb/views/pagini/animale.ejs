@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ro">
+<!-- 
+   
+    de adaugat la select multiplu
+    
+
+ -->
+<head>
+
+    <meta name="keywords" content="caine, pisica, petshop">
+    <meta name="description" content="Pet Shop. Animalute, mancare si accesorii">
+    <title>PetMania</title>
+    <%- include("../fragmente/head") %>
+    <script type="text/javascript" src=/js/animale.js></script>
+</head>
+
+<body>
+    <main>
+    <%- include("../fragmente/header") %>
+    <label>Culoare <input type="text" id="inp-culoare" name="culoare" placeholder="Culoare.."></label>
+    <!-- <label> Maxim greutate: <input type="number" id="inp-calorii" value="5"></label> -->
+        <label> Pret minim<input type="range" id="inp-pret" value="0" min="0"  max="1500"></label>
+        <label>Tip:
+            <select id="inp-tip">
+                <option value="toate">toate</option>
+                <% for (let tip of locals.tipuri){  %>
+                    <li>
+                        <option value="<%- tip.tip %>"><%- tip.tip %></a></option>
+                    </li>
+                <% } %>
+            </select>
+        </label>
+        <!-- radio button-->
+        <p>
+            <span>Talie:</span>
+                <input type="checkbox" id="toate" name="talie" value="toate" class="inp-talie" checked>
+                <label for="toate">Toate</label>
+                <input type="checkbox" id="mica" name="talie" value="mica" class="inp-talie">
+                <label for="mica">Mica</label>
+                <input type="checkbox" id="medie" name="talie" value="medie" class="inp-talie">
+                <label for="medie">Medie</label>
+                <input type="checkbox" id="mare" name="talie" value="mare" class="inp-talie">
+                <label for="mare">Mare</label>        
+        </p>
+        <p>
+        <label for="inp-temperament">Alege temperament:</label>
+        <br>
+        <select name="inp-temperament" id="inp-temperament" multiple>
+          <option value="jucaus">Jucaus</option>
+          <option value="iubitor">Iubitor</option>
+          <option value="energic">Energic</option>
+          <option value="loial">Loial</option>
+          <option value="lenes">Lenes</option>
+          <option value="rasfatat">Rasfatat</option>
+          <option value="timid">Timid</option>
+        </select>
+    </p>
+    <p>
+        <label for="inp-descriere">Descriere</label>
+        <textarea id="inp-descriere" name="inp-descriere" rows="1" cols="50">
+        </textarea>
+    </p>
+     
+      <p>
+            <span>Dresat:</span>
+            <input type="radio" id="inp-dresat" name="dresat" value="toate" checked>
+            <label for="inp-dresat"> Nu conteaza</label>
+            <input type="radio" id="inp-dresat" name="dresat" value="false" >
+            <label for="inp-dresat"> Nu</label>
+            <input type="radio" id="inp-dresat" name="dresat" value="true">
+            <label for="inp-dresat"> Da</label>
+      </p>
+
+        <p>
+        <button id="filtrare">Filtreaza</button>
+        <button id="sortCrescPret">Sorteaza crescator dupa pret</button>
+        <button id="sortDescrescPret">Sorteaza descrescator dupa pret</button>
+        <button id="resetare">Reseteaza</button>
+        <button id="calcSuma">Calculeaza suma produselor</button>
+        </p>
+
+        <p id="p-suma">Apasați Alt+"c" pentru suma preturilor produselor afișate. </p>
+
+    <div>
+        
+        <% for (let animal of locals.animale){  %>
+            <article class="animal">
+                <h3 class="val-nume">
+                    Nume: <a href="/animale/<%- animal.id %>"><%- animal.nume%></a>
+                </h3>
+                <div class="info-prod1">
+                        <figure>
+                                <img src="/images/online_shop/<%- animal.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- animal.nume %>]" />
+                            </figure>
+                        <span class="pret">Pret:</span>
+                            <span class="val-pret"><%- animal.pret%></span>
+                        <br>
+                        <span class="culoare">Culoare:</span>
+                         <span class="val-culoare"><%- animal.culoare%></span>
+                         <br>
+                        <span class="temperament">Temperament: </span>
+                        <span class="val-temperament"><%- animal.temperament%></span>
+                        <br>
+                        <span class="data">Data adaugare: </span>
+                        <span class="val-data"><%- new Date(animal.data_adaugare).toLocaleDateString('ro-RO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%></span>
+                        <br>
+                        <span class="dresat">Dresat: </span>
+                        <span class="val-dresat"><%- animal.dresat%></span>
+                    </div>
+                <div class="info-prod2">
+                        <span class="tip">Tip: </span>
+                        <span class="val-tip"><%- animal.tip%></span>
+                        <br>
+                        <span class="talie">Talie: </span>
+                        <span class="val-talie"><%- animal.talie%></span>
+                        <br>
+                        <span class="descriere">Descriere: </span>
+                        <span class="val-descriere"><%- animal.descriere%></span>
+               
+                </div>
+            </article>
+        <% } %>
+    </div>
+</main>
+    <%- include("../fragmente/footer") %>
+</body>
+
+</html>

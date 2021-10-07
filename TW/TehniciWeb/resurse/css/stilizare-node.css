@@ -1,0 +1,25 @@
+/*GRID*/
+.nume { grid-area: a1; }
+.info-prod1 { grid-area: a2; }
+.info-prod2 { grid-area: a3; }
+
+.animal{
+    display: grid;
+    grid-template-areas:'a1 a1'
+    'a2 a3';
+
+/*spatiu intre celule grid*/
+grid-gap: 2rem;
+padding: var(--padding-intern);
+border: black;
+}
+.culoare, .pret, .temperament,  .data, .dresat, .tip, .talie, .descriere
+{
+    color: rgb(8, 97, 109);
+    font-weight: bold;
+}
+.animal >h3
+{
+    color: rgb(8, 97, 109);
+    font-weight: bold;
+}

@@ -1,0 +1,72 @@
+<header>
+    <h1>Pet Mania </h1>
+</header>
+
+
+<nav>
+    <label id="hamburger" for="ch-menu">
+        <img src="./images/Hamburger_icon_alb.png" alt="menu">
+    </label>
+    <input id="ch-menu" type="checkbox">
+    <ul class="meniu">
+        <li>
+            <div><a href = "/index"><span class="fa fa-home"></span><span class="display_none">Acasa</span></a></div>
+            <ul>
+                <li>
+                    <a href="#welcome">Bine ati venit</a>
+                </li>
+                <li>
+                    <a href="#about">Despre noi</a>
+                </li>
+                <li>
+                    <a href="#oferte">Oferte</a>
+                </li>
+                <li>
+                    <a href="#questions">Intreabari</a>
+                </li>
+                <li>
+                    <a href="#film">Filmulete</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="/inregistrare">Inregistrare</a>
+        </li>
+        <li>
+            <div>
+                <a href="/animale">
+                    Online Shop
+                </a>
+            </div>
+            <ul>
+                <li>
+                    <a href="/galerie">Galerie</a>
+                </li>
+                <% for (let tip of locals.tipuri){  %>
+                    <li>
+                        <a href="/animale?tip=<%- tip.tip %>"><%- tip.tip %></a>
+                    </li>
+                <% } %>
+            </ul>
+        </li>
+        <li>
+            <a href="/contact">Contact</a>
+        </li>
+
+        <% if(locals.user){ %>
+            <% if(locals.user.rol === "admin"){ %>
+                <li>
+                    <a href="/utilizatori">Utilizatori</a>
+                </li>
+            <% } %>
+            <li>
+                <div><a href="/profil"><span class="fa fa-user"></span><span class="display_none"><%- locals.user.username %></span></a></div>
+                <ul>
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </li>
+        <% } %>
+    </ul>    
+</nav>

@@ -1,0 +1,458 @@
+create table salon(
+  salon_id number(4) PRIMARY KEY,
+  oras varchar2(20) NOT NULL,
+  strada varchar2(20)
+);
+
+INSERT INTO salon (salon_id, oras, strada)
+VALUES (1, 'Bucuresti', 'Victoriei'); 
+
+INSERT INTO salon (salon_id, oras, strada)
+VALUES (2, 'Iasi', 'Independentei'); 
+
+INSERT INTO salon (salon_id, oras, strada)
+VALUES (3, 'Bucuresti', 'Sincai'); 
+
+INSERT INTO salon (salon_id, oras, strada)
+VALUES (4, 'Iasi', 'Stefan');
+
+INSERT INTO salon (salon_id, oras, strada)
+VALUES (5, 'Bucuresti', 'Unirii'); 
+
+INSERT INTO salon (salon_id, oras, strada)
+VALUES (6, 'Vaslui', 'Kogalniceanu'); 
+
+
+
+commit;
+
+create table angajat(
+  angajat_id number(4) PRIMARY KEY,
+  nume varchar2(20) NOT NULL,
+  prenume varchar2(20) NOT NULL,
+  telefon number(11) NOT NULL
+);
+
+INSERT INTO angajat(angajat_id, nume, prenume, telefon)
+VALUES (11, 'Popescu', 'Ana', 1234567890); 
+
+INSERT INTO angajat(angajat_id, nume, prenume, telefon)
+VALUES (12, 'Strat', 'Ana', 1234); 
+
+INSERT INTO angajat(angajat_id, nume, prenume, telefon)
+VALUES (21, 'Buza', 'Maria', 0010);
+
+INSERT INTO angajat(angajat_id, nume, prenume, telefon)
+VALUES (22, 'Ivasuz', 'Clara', 00132);
+
+INSERT INTO angajat(angajat_id, nume, prenume, telefon)
+VALUES (31, 'Lovo', 'Ana', 0000);
+
+INSERT INTO angajat(angajat_id, nume, prenume, telefon)
+VALUES (32, 'Popovici', 'Ema', 0013234);
+
+INSERT INTO angajat(angajat_id, nume, prenume, telefon)
+VALUES (41, 'Amariei', 'Ana', 000094);
+
+INSERT INTO angajat(angajat_id, nume, prenume, telefon)
+VALUES (51, 'Voron', 'Patricia', 0013234);
+
+INSERT INTO angajat(angajat_id, nume, prenume, telefon)
+VALUES (61, 'Bucur', 'Patricia', 00187);
+
+commit;
+
+
+create table email(
+    email_id number(5) PRIMARY KEY,
+    angajat_id number(4) NOT NULL,
+    email varchar2(30) NOT NULL
+);
+create sequence email_pk;
+
+alter table email
+add constraint email_angajat foreign key(angajat_id)
+    references angajat(angajat_id)
+    on delete cascade;    
+-------------------------------------------------------------------------------13
+-------------------------------------angajat_id = salon_ + al catelea angajat e
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 11, 'popescu@ana');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 12, 'strat@ana');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 12, 'strat@anaofficial');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 21, 'buza@mariafficial');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 21, 'buza@maria');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 22, 'ivasuz@clara');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 31, 'lovo@ana');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 32, 'popovici@ema');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 41, 'amariei@ana');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 51, 'voron@patricia');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 61, 'bucur@patricia');
+
+commit;
+--select sysdatefrom dual;
+--04-05-2021
+
+
+create table contract(
+  contract_id number(4) PRIMARY KEY,
+  angajat_id number(4) NOT NULL ,
+  salon_id number(4) NOT NULL,
+  data date NOT NULL,
+  salariu number(4) NOT NULL
+);
+
+alter table contract
+add constraint contract_angajat foreign key(angajat_id)
+    references angajat(angajat_id)
+    on delete cascade;
+    
+alter table contract
+add constraint contract_salon foreign key(salon_id)
+    references salon(salon_id)
+    on delete cascade;         
+-------------------------------------contract_id = salon + angajat
+INSERT INTO contract(contract_id, angajat_id, salon_id, data, salariu)
+VALUES (111, 11, 1, '04-05-2021', 2000); 
+
+INSERT INTO contract(contract_id, angajat_id, salon_id, data, salariu)
+VALUES (112, 12, 1, '27-06-2019', 1000); 
+
+INSERT INTO contract(contract_id, angajat_id, salon_id, data, salariu)
+VALUES (221, 21, 2, '27-06-2019', 3000); 
+
+INSERT INTO contract(contract_id, angajat_id, salon_id, data, salariu)
+VALUES (222, 22, 2, '27-06-2019', 2700); 
+
+INSERT INTO contract(contract_id, angajat_id, salon_id, data, salariu)
+VALUES (331, 31, 3, '27-06-2019', 3000); 
+
+INSERT INTO contract(contract_id, angajat_id, salon_id, data, salariu)
+VALUES (332, 32, 3, '20-08-2020', 1500); 
+
+INSERT INTO contract(contract_id, angajat_id, salon_id, data, salariu)
+VALUES (441, 41, 4, '27-06-2019', 2700); 
+
+INSERT INTO contract(contract_id, angajat_id, salon_id, data, salariu)
+VALUES (551, 51, 5, '20-06-2019', 3000); 
+
+INSERT INTO contract(contract_id, angajat_id, salon_id, data, salariu)
+VALUES (661, 61, 6, '20-06-2019', 3000); 
+
+commit;
+
+create table observatii(
+  observatii_id number(4) PRIMARY KEY,
+  contract_id number(4) NOT NULL,
+  data_inceput date,
+  data_sfarsit date,
+  concediu number(4)
+);
+
+alter table observatii
+add constraint observatii_contract foreign key(contract_id)
+    references contract(contract_id)
+    on delete cascade;
+
+INSERT INTO observatii(observatii_id, contract_id, data_inceput, data_sfarsit, concediu)
+VALUES (111, 111, '04-06-2021', '04-05-2022', Null);
+
+INSERT INTO observatii(observatii_id, contract_id, data_inceput, data_sfarsit, concediu)
+VALUES (112, 112, '1-07-2019', '01-07-2022', 30);
+
+INSERT INTO observatii(observatii_id, contract_id, data_inceput, data_sfarsit, concediu)
+VALUES (221, 221, '04-06-2021', '04-05-2022', Null);
+
+INSERT INTO observatii(observatii_id, contract_id, data_inceput, data_sfarsit, concediu)
+VALUES (222, 222, '1-07-2019', '01-07-2022', 30);
+
+INSERT INTO observatii(observatii_id, contract_id, data_inceput, data_sfarsit, concediu)
+VALUES (331, 331, '27-07-2019', '01-07-2022', 20);
+
+INSERT INTO observatii(observatii_id, contract_id, data_inceput, data_sfarsit, concediu)
+VALUES (332, 332, '20-09-2020', '01-07-2022', Null);
+
+INSERT INTO observatii(observatii_id, contract_id, data_inceput, data_sfarsit, concediu)
+VALUES (441, 441, '20-09-2020', '04-05-2022', Null);
+
+INSERT INTO observatii(observatii_id, contract_id, data_inceput, data_sfarsit, concediu)
+VALUES (551, 551, '20-09-2019', '04-05-2022', 30);
+
+INSERT INTO observatii(observatii_id, contract_id, data_inceput, data_sfarsit, concediu)
+VALUES (661, 661, '20-09-2019', '04-05-2022', 30);
+
+
+create table client(
+  client_id number(4) PRIMARY KEY,
+  nume varchar2(20) NOT NULL,
+  prenume varchar2(20)
+);
+
+INSERT INTO client(client_id, nume, prenume)
+VALUES (1, 'Ion', ''); 
+
+INSERT INTO client(client_id, nume, prenume)
+VALUES (2, 'Ilinca', ''); 
+
+INSERT INTO client(client_id, nume, prenume)
+VALUES (3, 'Izabela', 'Nast'); 
+
+INSERT INTO client(client_id, nume, prenume)
+VALUES (4, 'Beatrice', 'Lungu'); 
+
+INSERT INTO client(client_id, nume, prenume)
+VALUES (5, 'Lavinia', 'Rusu'); 
+
+commit;
+
+create table adresa(
+  adresa_id number(4) PRIMARY KEY,
+  client_id number(4) NOT NULL,
+  oras varchar2(20) NOT NULL,
+  strada varchar2(20)
+);
+
+alter table adresa
+add constraint adresa_client foreign key(client_id)
+    references client(client_id)
+    on delete cascade;
+    
+INSERT INTO adresa(adresa_id, client_id, oras, strada)
+VALUES (1, 1, 'Timisoara',Null); 
+
+INSERT INTO adresa(adresa_id, client_id, oras, strada)
+VALUES (2, 2, 'Buzau','Alecsandri'); 
+
+INSERT INTO adresa(adresa_id, client_id, oras, strada)
+VALUES (3, 3, 'Bucuresti', Null); 
+
+INSERT INTO adresa(adresa_id, client_id, oras, strada)
+VALUES (4, 4, 'Iasi',Null); 
+
+INSERT INTO adresa(adresa_id, client_id, oras, strada)
+VALUES (5, 5, 'Bucuresti','Avantului'); 
+
+commit;
+
+create table sedinta(
+  sedinta_id number(4) PRIMARY KEY,
+  client_id number(4) NOT NULL,
+  observatii_sedinta varchar2(100)
+);
+
+alter table sedinta
+add constraint sedinta_client foreign key(client_id)
+    references client(client_id)
+    on delete cascade;
+
+INSERT INTO sedinta(sedinta_id, client_id, observatii_sedinta)
+VALUES (1, 1, 'ok'); 
+
+INSERT INTO sedinta(sedinta_id, client_id, observatii_sedinta)
+VALUES (2, 1, 'nemultumit');
+
+INSERT INTO sedinta(sedinta_id, client_id, observatii_sedinta)
+VALUES (3, 2, 'foarte nultumit');
+
+INSERT INTO sedinta(sedinta_id, client_id, observatii_sedinta)
+VALUES (4, 2, Null);
+
+INSERT INTO sedinta(sedinta_id, client_id, observatii_sedinta)
+VALUES (5, 3, 'decalare program'); 
+
+
+create table servicii(
+  serviciu_id number(4) PRIMARY KEY,
+  angajat_id number(4) NOT NULL,
+  denumire varchar2(200)
+);
+
+alter table servicii
+add constraint serviciu_angajat foreign key(angajat_id)
+    references angajat(angajat_id)
+    on delete cascade;
+
+INSERT INTO servicii(serviciu_id, angajat_id, denumire)
+VALUES (1, 11, 'manichiura'); 
+
+INSERT INTO servicii(serviciu_id, angajat_id, denumire)
+VALUES (2, 21, 'machiaj zi'); 
+
+INSERT INTO servicii(serviciu_id, angajat_id, denumire)
+VALUES (3, 22, 'machiaj seara'); 
+
+INSERT INTO servicii(serviciu_id, angajat_id, denumire)
+VALUES (4, 11, 'pedichiura'); 
+
+INSERT INTO servicii(serviciu_id, angajat_id, denumire)
+VALUES (5, 31, 'cosmetica'); 
+
+commit;
+
+create table sedinta_serviciu(
+  sedinta_serviciu_id number(4) PRIMARY KEY,
+  sedinta_id number(4),
+  serviciu_id number(4),
+  obs varchar2(200)
+);
+
+alter table sedinta_serviciu
+add constraint sedinta_serviciu_sedinta foreign key(sedinta_id)
+    references sedinta(sedinta_id)
+    on delete cascade;
+
+alter table sedinta_serviciu
+add constraint sedinta_serviciu_serviciu foreign key(serviciu_id)
+    references servicii(serviciu_id)
+    on delete cascade;
+    
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (1, 1, 1, Null);
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (2, 1, 2, 'decalare program');
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (3, 1, 3, Null);
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (4, 2, 1, Null);
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (5, 3, 5, 'decalare program');
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (6, 3, 1, Null);
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (7, 4, 2, Null);
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (8, 4, 4,'decalare program');
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (9, 4, 1, 'foarte multumita');
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (10, 4, 5, Null);
+
+INSERT INTO sedinta_serviciu(sedinta_serviciu_id, sedinta_id, serviciu_id, obs)
+VALUES (11, 5, 5, Null);
+
+commit;
+
+create table factura(
+  factura_id number(4) PRIMARY KEY,
+  sedinta_id number(4) NOT NULL,
+  mod_trimitere varchar2(100) NOT NULL
+);
+
+alter table factura
+add constraint factura_sedinta foreign key(sedinta_id)
+    references sedinta(sedinta_id)
+    on delete cascade;
+
+INSERT INTO factura(factura_id, sedinta_id, mod_trimitere)
+VALUES (1, 1, 'listata');
+
+INSERT INTO factura(factura_id, sedinta_id, mod_trimitere)
+VALUES (2, 2, 'mail');
+
+INSERT INTO factura(factura_id, sedinta_id, mod_trimitere)
+VALUES (3, 3, 'listata');
+
+INSERT INTO factura(factura_id, sedinta_id, mod_trimitere)
+VALUES (4, 4, 'listata');
+
+INSERT INTO factura(factura_id, sedinta_id, mod_trimitere)
+VALUES (5, 5, 'mail');
+
+commit;
+
+create table preferinte_factura(
+  preferinte_id number(4) PRIMARY KEY,
+  client_id number(4) NOT NULL,
+  observatii varchar2(100),
+  importanta varchar2(100)
+);
+
+alter table preferinte_factura
+add constraint preferinte_client foreign key(client_id)
+    references client(client_id)
+    on delete cascade;
+
+INSERT INTO preferinte_factura(preferinte_id, client_id, observatii, importanta)
+VALUES (1, 1, 'semnatura manager', 'ridicata'); 
+
+INSERT INTO preferinte_factura(preferinte_id, client_id, observatii, importanta)
+VALUES (2, 2, 'stampila', 'scazuta'); 
+
+INSERT INTO preferinte_factura(preferinte_id, client_id, observatii, importanta)
+VALUES (3, 3, 'semnatura manager', 'medie'); 
+
+INSERT INTO preferinte_factura(preferinte_id, client_id, observatii, importanta)
+VALUES (4, 4, 'sigilata', 'ridicata'); 
+
+INSERT INTO preferinte_factura(preferinte_id, client_id, observatii, importanta)
+VALUES (5, 5, 'stampila', 'ridicata'); 
+
+commit;
+
+create table reducere(
+  reducere_id number(4) PRIMARY KEY,
+  client_id number(4) NOT NULL,
+  angajat_id number(4) NOT NULL,
+   serviciu_id number(4) NOT NULL,
+   procent number(4) NOT NULL
+);
+alter table reducere
+add constraint reducere_client foreign key(client_id)
+    references client(client_id)
+    on delete cascade;  
+    
+alter table reducere
+add constraint reducere_angajat foreign key(angajat_id)
+    references angajat(angajat_id)
+    on delete cascade;
+    
+alter table reducere
+add constraint reducere_serviciu foreign key(serviciu_id)
+    references servicii(serviciu_id)
+    on delete cascade;
+    
+INSERT INTO reducere(reducere_id, client_id, angajat_id, serviciu_id, procent)
+VALUES (1, 1, 11, 1, 10);
+
+INSERT INTO reducere(reducere_id, client_id, angajat_id, serviciu_id, procent)
+VALUES (2, 1, 22, 1, 15);
+
+INSERT INTO reducere(reducere_id, client_id, angajat_id, serviciu_id, procent)
+VALUES (3, 2, 11, 1, 10);
+
+INSERT INTO reducere(reducere_id, client_id, angajat_id, serviciu_id, procent)
+VALUES (4, 2, 22, 5, 10);
+
+INSERT INTO reducere(reducere_id, client_id, angajat_id, serviciu_id, procent)
+VALUES (5, 2, 12, 1, 15);
+
+commit;

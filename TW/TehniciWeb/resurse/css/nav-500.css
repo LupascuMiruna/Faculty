@@ -1,0 +1,84 @@
+/*facem vizibil iconul de hamburger meniu*/
+#hamburger{
+    display: block;
+    
+    
+}
+/*implicit meniul e ascuns*/
+ul.meniu{
+    display: none;
+    position: absolute;
+    width:100%;
+}
+/*facem meniul vizibil la click pe hamburger meniu*/
+#ch-menu:checked+ul.meniu{
+    
+    display: block;
+    opacity: 1;
+    animation-name: aparitie-meniu;
+    transform-origin: top left;
+    transform: rotate(-90deg);
+    /*animation-iteration-count: 1;*/
+    animation-duration: 1s; 
+    animation-fill-mode: forwards;
+    transition-timing-function: ease-in;
+}
+@keyframes aparitie-meniu {
+
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+/*optiunile se intind pe toata latimea containerului*/
+nav ul.meniu li{
+    width: 100%;
+}
+/*meniul sa vina dasupra continutului de mai jos, 
+fara a impinge continutul*/
+nav ul.meniu>li ul {
+    position: absolute;
+    width: 100%;
+    z-index: 20;
+} 
+
+/*background*/
+nav ul.meniu li:hover {
+    display:block;
+    background-color:var(--bleudesch);
+    transition:all 0.5s linear;
+    color: white;
+}
+
+/*nu mai afisam cuvantul acasa*/
+.display_none{
+    display: none;
+}
+
+/*ca sa scoatem liniuta*/
+nav ul.meniu > li > a:hover::before {
+    display: none;
+}
+
+/*ca sa se schimbe culoarea la text*/
+nav ul.meniu li>div:hover, nav ul.meniu li>a:hover {
+    color: var(--bleumarin);
+}
+
+@media(max-width: 500px){
+    #grid-container
+    {
+        grid-template-areas:
+        'i1'
+        'i5'
+        'i6'
+        'i7'
+        'i3'
+        'i2'
+        'i4'
+        'i8';
+    }
+}

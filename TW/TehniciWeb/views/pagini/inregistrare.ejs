@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html  lang="ro">
+    <head>
+        <meta name="keywords" content="caine, pisica, petshop">
+        <meta name="description" content="Pet Shop. Animalute, mancare si accesorii">
+        <title>PetMania  înregistrare</title>
+        <%- include("../fragmente/head") %>
+     
+         
+        <script type="text/javascript" src=/js/inregistrare.js></script>
+    </head>
+    <body>
+    <%- include("../fragmente/header") %>
+
+    <main>
+    <div class="afisaj">
+        <h1>Inregistrare utilizator</h1>
+        
+		<% if (locals.err !="") { %>
+		<form id="form_inreg"  method="post" class="date"  action="/inreg" id="inregistrare" enctype="multipart/form-data">
+			<p>
+				<label>
+					Username: <input type="text" id="username" name="username"  value="prof<%= Math.floor(Math.random()*100000) %>" required pattern="[A-Za-z0-9]+">
+				</label>
+			</p>
+			<p>
+				<label>
+					Nume: <input type="text" id="nume" name="nume" value="Gogulescu">
+				</label>
+			</p>
+			<p>
+				<label>
+					Prenume: <input type="text" id="prenume" name="prenume" value="Gogu">
+				</label>
+			</p>
+			<p>
+				<label>
+					Parola: <input id="parl" type="password" name="parola" value="">
+				</label>
+			</p>
+			<p>
+				<label>
+					Reintroduceti parola: <input id="rparl" type="password" name="rparola" value="">
+				</label>
+			</p>
+			<p>
+				<label>
+					Email: <input type="text" id="email" name="email" value="pejow67176@pigicorn.com"  size="50">
+				</label>
+			</p>
+			<p>
+				<label>
+				    Telefon: <input type="text" id="telefon" name="telefon" value="">
+				</label>
+			</p>
+			<p>
+				<label>
+					Poza: <input type="file" id="poza" name="poza">
+				</label>			
+			</p>
+			<p>		
+				<input type="submit" value="Trimite">
+				<input type="reset" value="Reseteaza">
+			</p>
+		</form>
+	<% } %>
+	<% if(locals.raspuns) { %>
+	<%- locals.raspuns+"<br/>"%>
+	<% } %>
+	<% if(locals.err) { %>
+	<%- locals.err %>
+	<% } %>
+    </div>
+</main>
+
+<footer>
+    <%- include("../fragmente/footer") %>
+</footer>
+
+</body>
+</html>

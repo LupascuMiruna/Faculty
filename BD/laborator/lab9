@@ -1,0 +1,111 @@
+--sa se afiseze numele fiecarui angajat
+--si salariul maxim din departamentul aangajatului
+select first_name, 
+    (select max(salary)
+     from employees
+     where e.department_id = department_id) sal_max
+from employees e;
+
+--28
+select (select count(employee_id)
+        from employees
+        where to_char(hire_date, 'yyyy') = 1997) an_1997,
+        (select count(employee_id)
+        from employees
+        where to_char(hire_date, 'yyyy') = 1998) an_1998,
+        (select count(employee_id)
+        from employees) total
+from dual;
+
+--29
+select d.department_id, department_name, 
+    (select count(employee_id)
+     from employees
+     where department_id = e.department_id) nr,
+    (select round(avg(nvl(salary,0)),2)
+     from employees
+     where department_id = e.department_id) medie,
+    first_name, salary, job_id
+from departments d 
+left join employees e on d.department_id = e.department_id;
+
+--subcerere in where
+--un anumit numar de randuri (1 sau mai multe)
+-- + anumit numar de coloane (1,2,3)
+select first_name
+from employees
+where (salary, department_id) in 
+    (select max(salary), department_id
+      from employees
+      group by department_id);
+      
+--subcerei in from
+-- sunt necorelate ( le corelam cu conditia din join)
+-- nu conteaza cate coloane sau cate randuri returneaza
+select first_name, max_sal.abc
+from employees e
+join (select department_id, max(salary) abc
+      from employees
+      group by department_id) max_sal 
+  on max_sal.department_id = e.department_id;
+  
+--30
+select d.department_id, department_name, avg(salary)
+from departments d
+join employees e on d.department_id = e.department_id
+group by d.department_id, department_name;
+
+select d.department_id, department_name, e.medie
+from departments d
+join (select department_id, avg(salary) medie
+      from employees
+      group by department_id) e
+  on d.department_id = e.department_id;
+  
+--31
+select last_name, salary, e.department_id, round(d.m,2)
+from employees e
+join (select department_id, avg(salary) m
+      from employees
+      group by department_id) d
+  on e.department_id = d.department_id;
+  
+--fara subcerere
+select  e.last_name, e.salary, e.department_id,
+  round(avg(coleg.salary), 2)
+from employees e
+join employees coleg 
+  on e.department_id = coleg.department_id
+group by  e.last_name, e.salary, e.department_id;
+
+--32
+select last_name, salary, e.department_id, round(d.m, 2),
+  d.nr
+from employees e
+join (select department_id, avg(salary) m, 
+        count(employee_id) nr
+      from employees
+      group by department_id) d
+  on e.department_id = d.department_id;
+  
+--33
+select last_name, salary, department_name
+from employees e
+join departments d on e.department_id = d.department_id
+join (select department_id, min(salary) sal
+        from employees
+        group by department_id) q
+  on q.department_id = e.department_id
+where salary = q.sal;
+
+--34  
+select e.department_id, dep.department_name, emp.cnt, round(emp.med,2), last_name, job_id
+from employees e
+join (select count(employee_id) cnt, avg(salary) med, 
+        department_id
+      from employees emp
+      group by (department_id) ) emp
+  on emp.department_id = e.department_id
+left join departments dep
+  on e.department_id = dep.department_id;
+

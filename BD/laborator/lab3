@@ -1,0 +1,93 @@
+--5
+select *
+from employees
+where mod(trunc(sysdate)-trunc(hire_date),7)=0;
+
+--6
+select employee_id, first_name, salary,
+  round(salary + (salary*15/100),2) "Salariu nou",
+  round((salary+(salary*15/100))/100, 2) "Numar sute"
+from employees
+where mod (salary, 1000) <> 0;
+
+--7
+select first_name ||' '|| last_name as "Nume angajat",
+  rpad(hire_date, 20) as "Data angajarii"
+from employees
+where commission_pct is not null;
+
+--8 
+select to_char(sysdate+30, 'MON,DY,YYYY,HH24,MI,SS')
+from dual;
+
+--9 Să se afişeze numărul de zile rămase 
+--până la sfârşitul anului.
+--use sysdate 
+--use "date_A-date_B"
+--use to_char (format = YYYY)
+
+select trunc(to_date(concat('31-DEC-',to_char(sysdate, 'YYYY')))
+    - sysdate) "nr zile"
+from dual;
+
+SELECT TO_DATE( (TO_CHAR(SYSDATE, 'YYYY') + 1) 
+    || '-JAN-01', 'YYYY-MM-DD') 
+  - trunc(SYSDATE)   
+FROM dual;
+
+--10 tema
+
+--11 care este prima zi de Luni după 6 luni de serviciu
+select first_name || last_name Nume,
+  hire_date, 
+  next_day(add_months(hire_date, 6), 'Monday') "Negociere"
+from employees;
+
+--12
+select first_name, 
+  round(months_between(sysdate,hire_date)) "Luni lucrate"
+from employees
+order by "Luni lucrate";
+
+--13
+select last_name, hire_date, to_char(hire_date, 'DAY') "nume zi",
+  decode(trim(both ' 'from to_char(hire_date, 'DAY')),
+    'MONDAY', 1,
+    'TUESDAY', 2,
+    'WEDNESDAY',3,
+    'THURSDAY',4,
+    'FRIDAY', 5,
+    'SATURDAY', 6,
+    7
+  )"nr zi"
+from employees
+order by "nr zi";
+
+
+--14
+select first_name, 
+  nvl(to_char(commission_pct,'0.99'), 'Fara comision') as comision
+from employees;
+
+--15
+--salary + null * salary = salary+null = null
+--null > 1 => false
+--null < 5 => false
+--null = 1 => false
+--null <> 'n' => false
+--null is null => true
+--null is not null => true
+
+select first_name, salary, commission_pct
+from employees
+where salary + nvl(commission_pct,0)*salary > 10000;
+
+--16
+select first_name, job_id, salary,
+  decode(job_id, 
+    'IT_PROG', salary*1.2,
+    'SA_REP', salary * 1.25,
+    'SA_MAN', salary*1.35,
+    salary) "Salariu negociat"
+from employees;
+

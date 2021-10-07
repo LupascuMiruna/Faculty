@@ -1,0 +1,274 @@
+select employee_id blablabla, first_name
+from employees
+where lower(first_name) like '%e%'
+union 
+select department_id, department_name
+from departments
+where lower(department_name) like '%a%';
+
+--11
+select department_id 
+from departments
+where lower(department_name) like '%re%'
+union
+select department_id
+from employees
+where upper(job_id) = 'SA_REP';
+
+--12
+select department_id 
+from departments
+where lower(department_name) like '%re%'
+union all
+select department_id
+from employees
+where upper(job_id) = 'SA_REP';
+
+--13
+select department_id
+from departments
+minus
+select department_id
+from employees;
+
+select d.department_id
+from departments d
+left join employees e on d.department_id = e.department_id
+where employee_id is null;
+
+--14
+select department_id
+from departments
+where lower(department_name) like '%re%'
+intersect
+select department_id
+from employees
+where upper(job_id) = 'HR_REP';
+
+--15
+select employee_id, job_id, first_name
+from employees
+where salary > 3000
+UNION
+select employee_id, e.job_id, first_name
+from employees e
+join jobs j on e.job_id = j.job_id
+where salary > (j.min_salary + max_salary)/2;
+
+select employee_id, e.job_id, first_name
+from employees e
+join jobs j on e.job_id = j.job_id
+where salary > (j.min_salary + max_salary)/2
+ or salary > 3000;
+ 
+--enuntati si rezolvati o cerere care poate fi scrisa 
+--atat cu  join cat si cu minus
+
+-- sa se afiseze locatiile fara departamente
+select location_id
+from locations
+minus 
+select location_id
+from departments;
+
+select l.location_id
+from locations l
+left join departments d on l.location_id = d.location_id
+where department_id is null
+order by l.location_id;
+
+--subcereri necorelate
+select department_name
+from departments
+where department_id in (select department_id
+                        from employees);
+
+--subcereri corelate                 
+select department_name
+from departments c_parinte
+where department_id in 
+  (select department_id
+   from employees
+   where employee_id <> c_parinte.department_id);
+   
+
+--angajatii din oxford
+select employee_id
+from employees
+where department_id in 
+    (select department_id
+     from departments d
+     join (select location_id
+           from locations
+           where city = 'Oxford') l
+      on d.location_id = l.location_id);
+
+--16
+select last_name, hire_date
+from employees
+where hire_date > any
+    (--data la care s-a angajt gates
+     select hire_date
+     from employees
+     where lower(last_name) = 'gates');
+
+
+--17 Folosind subcereri, scrieţi o cerere pentru a 
+--afişa numele şi salariul pentru toţi
+--colegii (din acelaşi departament) lui Gates. 
+--Se va exclude Gates.
+
+select first_name, last_name, salary
+from employees
+where department_id in 
+    (--departament gates
+     select department_id
+     from employees
+     where lower(last_name) = 'gates')
+  and lower(last_name) <> 'gates';
+
+--18
+select last_name, salary
+from employees
+where manager_id in 
+        (--presedintele
+        select employee_id
+        from employees
+        where manager_id is null);
+
+--19
+select first_name, department_id, salary
+from employees
+where (department_id, salary) in 
+        (--ang cu comision
+         select department_id, salary
+         from employees
+         where commission_pct is not null);
+
+select distinct ang.first_name, ang.department_id, ang.salary
+from employees ang
+join employees ang_com
+  on (ang.department_id = ang_com.department_id
+      and ang.salary = ang_com.salary
+      and ang_com.commission_pct is not null);
+  --20
+select employee_id, last_name, salary, d.department_id,
+  d.department_name
+from employees e
+join departments d on d.department_id = e.department_id
+where d.department_id in 
+    (--deartamentele cu t angajati
+     select distinct department_id
+     from employees
+     where lower(last_name) like '%t%')
+  and e.salary > (select (min_salary + max_salary)/2
+                  from jobs
+                  where job_id = e.job_id)
+order by last_name;
+
+
+select employee_id, last_name, salary, d.department_id,
+  d.department_name
+from employees e
+join jobs j on j.job_id = e.job_id
+join departments d on d.department_id = e.department_id
+where d.department_id in 
+    (--deartamentele cu t angajati
+     select distinct department_id
+     from employees
+     where lower(last_name) like '%t%')
+  and e.salary > (min_salary + max_salary)/2
+order by last_name;
+  
+--21
+select first_name, salary
+from employees
+where salary > ALL
+      (--functionarii
+       select salary
+       from employees
+       where lower(job_id) like '%clerk%')
+order by salary desc;
+
+--22
+select last_name, department_name, salary
+from employees e
+left join departments d on d.department_id = e.department_id
+where e.manager_id in (--ang cu comision
+                        select employee_id
+                        from employees
+                        where commission_pct is not null)
+  and commission_pct is null;
+
+--23
+select first_name, department_id, salary, job_id
+from employees
+where (salary, commission_pct) in 
+    (--ang oxford
+    select salary, commission_pct
+    from employees e
+    join departments d on e.department_id = d.department_id
+    join locations l on d.location_id = l.location_id
+    where lower(city) = 'oxford');
+
+--24
+select last_name, d.department_id, job_id
+from employees e
+join departments d on d.department_id = e.department_id
+join locations l on d.location_id = l.location_id
+where lower(city) = 'toronto';
+
+
+select count(employee_id), department_id, count(commission_pct)
+from employees
+group by department_id;
+
+select sum(salary), department_id
+from employees
+group by department_id;
+
+select sum(salary), job_id
+from employees
+group by job_id;
+
+--departamentele care au mai mult de 5 angajtai 
+--care au comision
+select department_id, count(employee_id)
+from employees
+where department_id is not null
+group by department_id
+having count(employee_id) > 5;
+
+--11
+select max(salary) maxim, min(salary) minim, 
+  sum(salary) suma, round(avg(nvl(salary,0)), 2) media
+from employees;
+--1,2,3,NULL => avg = (1+2+3) /3
+--1,2,3,NULL => avg+nvl = (1+2+3+0)/4
+
+select avg(commission_pct), avg(nvl(commission_pct,0))
+from employees;
+
+--12
+select job_id, min(salary), max(salary), round(avg(salary),2)
+from employees
+group by job_id;
+
+--13
+select job_id, count(employee_id)
+from employees
+group by job_id;
+
+--14
+select count(distinct manager_id) "Nr. manageri"
+from employees;
+
+--15
+select max(round(avg(nvl(salary,0))))
+from employees
+group by department_id;
+
+select max(avg(salary)) - min(avg(salary))
+from employees
+group by department_id;
+

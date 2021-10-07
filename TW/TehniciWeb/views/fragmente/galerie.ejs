@@ -1,0 +1,17 @@
+<section id="galerie-statica">
+    <h2>Galerie</h2>
+    <div id="grid-galerie">
+        <% for (let imag of locals.imagini_final){  %>
+            <figure>
+                <picture>
+                    <!-- il ia pe primul care se potriveste cu query-ul din media-->
+                    <source srcset="/<%-imag.mic%>" media="(max-width:700px)" />
+                    <img src="/<%-imag.mare%>" alt="text" />
+                </picture>
+                <figcaption>
+                    <%-imag.descriere%>
+                </figcaption>
+            </figure>
+            <% } %>
+    </div>
+</section>

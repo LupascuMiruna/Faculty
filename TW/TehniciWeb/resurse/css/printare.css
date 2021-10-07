@@ -1,0 +1,173 @@
+/*STIL PRINTARE*/
+
+#watermark, #absolute
+{
+  display: none;
+}
+
+
+
+@media print{
+ 
+ nav {
+   height: auto;
+   page-break-after: always;
+   page-break-inside: avoid;
+   page-break-before: avoid;
+   width: 100%;
+  display: block;
+  visibility: visible;
+  position: relative;
+  margin:0; 
+  font-size: 12px;
+ }
+
+  nav ul.meniu>li
+  {
+   float:none;
+    width: 100%;
+    display: block;
+    margin:0; 
+  }
+
+  nav ul.meniu li{
+    width: 100%;
+    display: block;
+    position: relative;
+    float:none;
+    display: list-item;
+    margin:0; 
+  }
+nav ul.meniu ul{
+  display: block;
+  position: relative;
+  width: 100%;
+    display: block;
+    margin:0; 
+}
+nav ul.meniu li a, nav ul.meniu li div{
+  outline: none;
+  background-color: none;
+  
+  margin:0; 
+}
+
+
+  .banner
+  {
+    height: 5vw;
+    width: 50vw;
+    position: absolute;
+    top:0;
+    right: 0;
+    
+    z-index: 10000;
+    visibility: visible;
+    opacity: 1;
+    animation: none;
+    border-style: double; 
+    border-color:black;
+  }
+  /* #meniu-listare{
+    display: block;
+    page-break-after: always;
+  }
+ 
+  
+  #absolut{
+    position: absolute;
+		display: inline-block;
+		top:100%;
+		width:20px;
+		height:20px;
+		right:0;
+		overflow: visible;
+  }
+  #absolut::after{
+	content: 'Acesta este un proiect scolar!';
+		position: absolute;
+		font-size:10px;
+		right:0;
+		border:5px double black;
+		width:200px;
+		height:35px;
+		display: inline-block;
+	}
+ */
+
+  body{
+    font-family: Georgia, serif;
+    background: none;
+  }
+  
+ section{
+   break-inside: avoid;
+ }
+  h1{
+    align-content: center;
+    margin-top: 10%;
+		text-align:center;
+	
+  }
+  
+  
+  #watermark
+  {
+    display: block;
+    position: fixed;
+    bottom:0;
+    color:rgba(0,0,0,0.4);
+    right:0;
+    width: 60%;
+    height: 10%;
+    z-index: 10000;
+  }
+  #watermark::after{
+    
+    opacity:0.3;
+    padding:5px;
+    display: block;
+    background: white;
+    border:2px solid black;
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
+    border-right:none;
+    content:"Copyright Lupascu Miruna";
+  }
+
+footer{
+  page-break-before: always;
+}
+
+iframe, figure, img, 
+.taburi-iframe,
+#galerie-statica,
+#clip-video,
+#film,
+#circlee
+{
+  display: none;
+}
+a{
+  text-decoration: none;
+}
+}
+
+@page {
+  size: A4 portrait;
+  margin-bottom:2cm;
+  margin-top:2cm;
+  counter-increment: page;
+    
+}
+@page:left{
+
+  margin-left:2cm;
+  margin-right:1cm;
+  border-radius: 20cm;
+}
+@page:right{
+
+  margin-right:2cm;
+  margin-left:1cm;
+}

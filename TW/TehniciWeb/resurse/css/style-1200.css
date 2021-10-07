@@ -1,0 +1,26 @@
+/*la meniu*/
+.display_none, .banner{
+    display: none;
+}
+
+html{
+    font-size:14px;
+}
+body{
+    --body-padding:1.5rem;
+}
+#grid-container{
+    display: grid;
+    grid-template-areas:'i1 i1'
+                        'i5 i7'
+                        'i6 i4'
+                        'i3 i2'
+                        'i8 i8';
+    grid-gap:2rem;
+    padding: 4%;
+}
+
+#grid-galerie-anim
+{
+    display: none;
+}

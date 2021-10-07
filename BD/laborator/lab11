@@ -1,0 +1,138 @@
+--1 
+--a
+create table angajati_ame(
+  cod_and number(4),
+  nume varchar2(20),
+  prenume varchar2(20),
+  email char(15),
+  data_ang date,
+  job varchar2(10),
+  cod_sef number(4), 
+  salariu number(8, 2),
+  cod_dep number(2)
+);
+drop table angajati_ame;
+
+--b
+create table angajati_ame(
+  cod_ang number(4) PRIMARY KEY,
+  nume varchar2(20) NOT NULL,
+  prenume varchar2(20),
+  email char(15),
+  data_ang date,
+  job varchar2(20),
+  cod_sef number(4), 
+  salariu number(8, 2) NOT NULL,
+  cod_dep number(2)
+);
+drop table angajati_ame;
+
+--c
+create table angajati_ame2(
+  cod_and number(4),
+  nume varchar2(20),
+  prenume varchar2(20),
+  email char(15),
+  data_ang date,
+  job varchar2(10),
+  cod_sef number(4), 
+  salariu number(8, 2),
+  cod_dep number(2),
+  primary key (cod_and),
+  unique (nume),
+  constraint abc check (salariu is not null), 
+  constraint abc2 check (nume is not null)
+);
+drop table angajati_ame2;
+
+--2
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email,
+  Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (100, 'Nume1', 'Prenume1', Null, Null, 'Director',
+  null, 20000, 10); 
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email, 
+  Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (104, 'Nume5', 'Prenume5', 'Nume5', Null, 
+  'Programator', 101, 3000, 30);
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email,
+Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (103, 'Nume4', 'Prenume4', Null, Null, 
+'Inginer', 100, 9000, 20);
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email,
+Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (102, 'Nume3', 'Prenume3', Null, Null, 'Inginer', 100, 
+9000, 20);
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email,
+Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (101, 'Nume2', 'Prenume2', 'Nume2', to_date('02-FEB-14'), 'Inginer', 100, 10000, 10);
+
+commit;
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email,
+Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (105, 'Nume2', 'Prenume2', 'Nume2', to_date('02-FEB-14'), 'Inginer', 100, 10000, 10);
+
+create table abc as(select * from employees);
+
+select * 
+from angajati_ame;
+
+-------tranzactii
+--  insert
+--  insert
+--  insert 
+--  insert
+--commit -> 1
+--  insert
+--create -> 2
+--drop -> 3
+
+--3
+create table Angajati10_ame2 as( 
+    select * 
+    from employees 
+    where department_id = 10);
+    
+--4
+alter table angajati_ame
+add (comision number(4,2));
+
+--5
+alter table angajati_ame
+modify (salariu number(6,2)); 
+
+--6
+alter table angajati_ame
+modify (salariu number(10,2) default 0);
+
+--7
+alter table angajati_ame
+modify (comision number(2,2), salariu number(10,2));
+
+--8
+--UPDATE nume_tabel [alias]
+--SET col1 = expr1[, col2=expr2]
+--[WHERE conditie];
+  
+update angajati_ame
+set comision=0.1
+where lower(job) like 'i%';
+
+select * from angajati_ame;
+
+delete 
+from angajati_ame;
+commit;
+
+drop table angajati_ame2;
+drop table abc;
+drop table angajati10_ame;
+
+delete
+from employees
+where department_id=10;

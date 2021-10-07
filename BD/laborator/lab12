@@ -1,0 +1,197 @@
+create table angajati_ame(
+  cod_ang number(4) PRIMARY KEY,
+  nume varchar2(20) NOT NULL,
+  prenume varchar2(20),
+  email char(15),
+  data_ang date,
+  job varchar2(20),
+  cod_sef number(4), 
+  salariu number(8, 2) NOT NULL,
+  cod_dep number(2)
+);
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email,
+  Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (100, 'Nume1', 'Prenume1', Null, Null, 'Director',
+  null, 20000, 10); 
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email,
+Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (103, 'Nume4', 'Prenume4', Null, Null, 
+'Inginer', 100, 9000, 20);
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email,
+Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (102, 'Nume3', 'Prenume3', Null, Null, 'Inginer', 100, 
+9000, 20);
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email,
+Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (101, 'Nume2', 'Prenume2', 'Nume2', to_date('02-FEB-14'), 'Inginer', 100, 10000, 10);
+
+INSERT INTO angajati_ame (Cod_ang, Nume, Prenume, Email, 
+  Data_ang, Job, Cod_sef, Salariu, Cod_dep)
+VALUES (104, 'Nume5', 'Prenume5', 'Nume5', Null, 
+  'Programator', 101, 3000, 30);
+
+alter table angajati_ame
+modify (salariu number(10,2) default 0);
+
+alter table angajati_ame
+add (comision number(4,2));
+
+
+--tranzactie
+--  insert
+--  insert 
+--  update
+--commit -> 1
+--  delete
+--rollback-> 2
+--  insert
+--  insert
+--  select 
+--  delete
+--alter (modificare structura + commit) -> 3
+--create table (creare tabel + commit)-> 4
+--rollback => nu face nimic
+
+--9
+alter table angajati_ame
+modify (email varchar2(15));
+
+--10
+alter table angajati_ame
+add (nr_telefon varchar2(10) default '070++++++');
+
+--11
+select *
+from angajati_ame;
+
+alter table angajati_ame
+drop column nr_telefon;
+
+--12
+rename angajati_ame to angajati_ame3;
+rename angajati_ame3 to angajati_ame;
+--delete from angajati_ame3; -> sterge datele din tabel
+--rollback;
+--drop table angajati_ame3; ->sterge tabelul
+
+--15
+create table departamente_ame (
+  cod_dep number(2),
+  nume varchar2(15) not null,
+  cod_director number(4)
+);
+
+insert into departamente_ame (cod_dep, nume, cod_director) 
+values (10, 'nice', 102);
+
+insert into departamente_ame(cod_dep, nume, cod_director)
+values (20, 'Administrativ', 100);
+
+INSERT INTO departamente_ame (Cod_dep, Nume, Cod_director)
+VALUES (70, 'HR', Null);
+
+insert into departamente_ame(cod_dep, nume, cod_director)
+values (30, 'Programare', null);
+
+INSERT INTO departamente_ame(cod_dep, nume, cod_director)
+VALUES(60, 'PR', Null);
+
+insert into departamente_ame(cod_dep, nume, cod_director)
+values (40, 'Logistica', 110);
+
+insert into departamente_ame(cod_dep, nume, cod_director) 
+values (50, 'Marketing', 102);
+
+insert into departamente_ame (cod_dep, nume, cod_director)
+values (80, 'Marketing', 101);
+
+INSERT INTO departamente_ame (Cod_dep, Nume, Cod_director)
+VALUES (90, 'Marketing', NULL);
+
+commit;
+rollback;
+
+--delete
+--from departamente_ame
+--where cod_dep = 90;
+
+select *
+from departamente_ame;
+
+--17
+alter table departamente_ame
+add constraint depame_pk primary key(cod_dep);
+
+--18
+-- la stergerea unui job:
+ -- SET NULL: se pune null la job_id-ul angajatilor cu job-ul respectiv
+ -- CASCADE: se sterg angajatii cu job-ul respectiv
+ -- Oracle: comportament default da eroare 
+ -- Constrangere NotNull + Set Null => da eroatre
+--a
+alter table angajati_ame
+add constraint angame_coddep_fk foreign key (cod_dep)
+  references departamente_ame(cod_dep)
+  on delete set null;
+
+--b
+drop table angajati_ame; 
+
+create table angajati_ame(
+  cod_ang number(4) primary key,
+  nume varchar2(20) not null,
+  prenume varchar2(20),
+  email char(15) unique,
+  data_ang date,
+  job varchar2(20),
+  cod_sef number(4), 
+  salariu number(8, 2),
+  cod_dep number(2) check(cod_dep > 0),
+  comision number(2,2),
+  constraint cod_dep_ame_fk foreign key(cod_dep)
+    references departamente_ame(cod_dep)
+    on delete set null,
+  constraint cod_sef_ame_fk foreign key(cod_sef)
+    references angajati_ame(cod_ang)
+    on delete set null,
+  constraint nume_p_uq unique(nume, prenume),
+  constraint sal_ck check(salariu > comision*100)
+);
+
+select * from angajati_ame;
+
+--27
+delete
+from departamente_ame
+where cod_dep = 20;
+
+rollback;
+
+--modificati cod_dep fk din angajati astfel incat sa fie on delete cascade
+alter table angajati_ame
+drop constraint cod_dep_ame_fk;
+
+alter table angajati_ame
+add constraint cod_dep_ame_fk foreign key (cod_dep)
+  references departamente_ame(cod_dep)
+  on delete cascade;
+  
+--modificati cod_dep fk din angajati astfel incatfara a preciza ce se intampla la delete
+alter table angajati_ame
+drop constraint cod_dep_ame_fk;
+
+alter table angajati_ame
+add constraint cod_dep_ame_fk foreign key (cod_dep)
+  references departamente_ame(cod_dep);
+  
+delete
+from angajati_ame;
+
+drop table angajati_ame;
+
+drop table departamente_ame;
+

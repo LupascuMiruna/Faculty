@@ -1,0 +1,101 @@
+select *
+from employees
+where hire_date = '02-02-2020';
+
+select sysdate
+from dual;
+
+--15
+select first_name, hire_date
+from employees
+where hire_date like '%87';
+
+select first_name, hire_date
+from employees
+where to_char(hire_date, 'YY') = '87';
+
+--16
+select last_name, job_id
+from employees
+where manager_id is Null;
+
+--17
+select first_name, salary, commission_pct
+from employees
+where commission_pct is not Null
+order by salary desc, commission_pct desc;
+
+select first_name, salary, commission_pct
+from employees
+order by commission_pct desc;
+
+--18
+select first_name
+from employees
+where lower(first_name) like '__a%';
+
+--19
+select first_name
+from employees
+where lower(first_name) like '%l%l%' and
+  (department_id = 50 or manager_id = 102);
+
+--20
+select first_name, salary, commission_pct
+from employees
+where salary > 5 * (salary*commission_pct); 
+
+-------laboratorul 2
+select to_number('-123,123.23', 'S999,999.99')
+from dual;
+
+select decode(7, 1, 'este1', 2 ,'este2', 'incredibil')
+from dual;
+
+select nvl('a',1)
+from dual;
+
+select nvl(1,'a')
+from dual;
+
+--1
+select concat(first_name, concat(last_name, 
+  concat(' castiga ', concat(salary, 
+  concat(' lunar dar doreste ', 3*salary))))) 
+  as "Salariu ideal"
+from employees;
+
+select first_name || last_name || ' castiga '
+  || salary || ' lunar dar doreste '|| 3*salary
+  as "Salariu ideal"
+from employees;
+
+--2
+select initcap(first_name) "Prenume",
+  upper(last_name) Nume,
+  length(last_name) "Lungime nume"
+from employees
+where lower(last_name) like 'j%'
+  or lower(last_name) like  'm%'
+  or lower(last_name) like '__a%'
+order by "Lungime nume" desc;
+
+select initcap(first_name) "Prenume",
+    upper(last_name) Nume,
+    length(last_name) "Lungime nume"
+from employees
+where substr(lower(last_name),1,1) = 'm'
+    or substr(lower(last_name),1,1) = 'j'
+    or substr(lower(last_name),3,1) = 'a'
+order by "Lungime nume" desc;
+
+--3
+select employee_id, first_name, department_id
+from employees
+where trim(both ' ' from first_name) = 'Steven';
+
+--4
+select employee_id, first_name, length(first_name) "lungime nume",
+  instr(lower(first_name),'a') "pozitie a"
+from employees
+where lower(first_name) like '%e';

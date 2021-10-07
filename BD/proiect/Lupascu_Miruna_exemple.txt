@@ -1,0 +1,261 @@
+
+create table email(
+    email_id number(5) PRIMARY KEY,
+    angajat_id number(4) NOT NULL,
+    email varchar2(30) NOT NULL
+);
+create sequence email_pk;
+
+alter table email
+add constraint email_angajat foreign key(angajat_id)
+    references angajat(angajat_id)
+    on delete cascade;    
+-------------------------------------------------------------------------------13
+-------------------------------------angajat_id = salon_ + al catelea angajat e
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 11, 'popescu@ana');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 12, 'strat@ana');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 12, 'strat@anaofficial');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 21, 'buza@mariafficial');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 21, 'buza@maria');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 22, 'ivasuz@clara');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 31, 'lovo@ana');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 32, 'popovici@ema');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 41, 'amariei@ana');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 51, 'voron@patricia');
+
+insert into email(email_id, angajat_id,  email)
+values (email_pk.nextval, 61, 'bucur@patricia');
+
+commit;
+
+-----------------------------------------------------------------------------------------------cerinte
+
+--1
+-----sa se afiseze emailurile angajatilor din SALONUL 3 care au inceput munca exact dupa o luna dupa ce si au facut contractul
+---si salariul modificat, daca este cazul(se stie ca cei angajati in ianuarie au o crestere de 10%, cei in feb +20%)
+
+--join 4 tabele
+--CASE
+--1 functie pe data calendaristica
+
+select email, 
+        case to_number(to_char(c.data, 'MM'))
+        when 1 then c.salariu*1.1
+        when 2 then c.salariu*1.2
+        else c.salariu
+        end "salariu modificat"
+from email e
+join angajat a on a.angajat_id = e.angajat_id
+join contract c on c.angajat_id = e.angajat_id
+join salon s on s.salon_id = c.salon_id
+join observatii o on c.contract_id = o.contract_id
+where s.salon_id = 3 and add_months(c.data, 1) = o.data_inceput;
+
+--2
+--sa se afiseze angajatii care lucreaza la saloane cu salariul mediu >= 2000,
+
+--group by
+--having
+--functii grup
+--with
+with medii as(select salon_id, avg(salariu)medie
+             from contract
+             group by(salon_id)
+             having avg(salariu) >=2000
+             )
+select a.nume
+from medii m
+join contract c on c.salon_id = m.salon_id
+join angajat a on  a.angajat_id = c.angajat_id;
+
+
+
+--3
+----sa se afiseze in ordine alfabetica numele de familie  a angajatilor
+-- pe nume "Ana" care au salariul mai mare de 2000. Se va afisa si id-ul salonului la care lucreaza.
+ 
+--1 functie caractere
+--subcerere nesincronizata
+--order by
+--where(filtrare la nivel de lin)
+
+select a.nume, s.salon_id
+from angajat a
+join contract c on c.angajat_id = a.angajat_id
+join salon s on s.salon_id = c.salon_id
+where lower(a.prenume) = 'ana' and a.angajat_id in
+                                        ( select angajat_id
+                                          from contract 
+                                          where salariu > 2000
+                                        )
+order by a.nume;
+
+
+--4
+--sa se afiseze angajatii, data si numele zilei din saptamana cand au facut contractul si perioada de concediu pe care o au,
+--in caz ca nu au concediu, se va afisa" fara concediu" 
+
+--decode
+--2 functie caractere
+--nvl
+
+select a.nume, c.data, nvl(to_char(o.concediu), 'Fara concediu')"concediu",
+    decode(trim(both ' ' from to_char(c.data, 'D')),
+            '1', 'luni',
+            '2', 'marti',
+            '3', 'miercuri',
+            '4', 'joi',
+            '5', 'vineri',
+            '6', 'sambata',
+            'duminica'
+          )"nume zi"
+from contract c
+join angajat a on c.angajat_id = a.angajat_id
+join observatii o on c.contract_id = o.contract_id;
+
+
+---5
+---sa se afiseze salonul si date despre cei mai prost platiti angajati de la salonul respectiv si cate luni au trecut de cand au incheiat contractul
+
+--subcerere corelata
+--2 op pe date
+
+select s.salon_id, c.salariu, a.nume, round(months_between(sysdate, ang1.data),0)"nr luni" 
+from contract ang1
+join angajat a on ang1.angajat_id = a.angajat_id
+join contract c on c.angajat_id = ang1.angajat_id
+join salon s on c.salon_id = s.salon_id
+where c.salariu =(--cele mai mici salarii din salon
+                  select min(salariu)
+                  from contract ang
+                  where ang.salon_id = ang1.salon_id);
+                  
+-----------------------------------------------------------------
+--12
+--se sterg toti angajatii care au facut contractul acum mai mult de 48 luni           
+delete 
+from contract 
+where data in (
+            select data
+            from contract
+            where months_between(sysdate, data)>48);
+            
+
+-- se sterg toate saloanele din orase care incep cu V         
+delete
+from salon 
+where oras in(
+                select oras 
+                from salon
+                where oras like 'V%'
+              );
+              
+ --sa se stearga toate datele despre serviciile de machiaj             
+delete from servicii 
+where denumire in
+                (
+                    select denumire
+                    from servicii
+                    where denumire like 'machiaj%');
+                    
+-----------------------------------------------------------------              
+--13
+--introducere emailului
+-----------------------------------------------------------------
+--14
+--VIZUALIZARE
+---vizualizare care contine info salonul si contractele 
+create or replace view viz_salon_contract
+as 
+select  contract_id, salariu, s.salon_id, oras
+from salon s
+join contract c on c.salon_id = s.salon_id;
+
+-- contract e key-preserved table pentru ca contract_id e unic
+
+---modific o linie din tabelul key preserved
+--permis
+update viz_salon_contract
+set salariu = 2000
+where contract_id = 661;
+
+--nepermis
+update viz_salon_contract
+set salon_id = 7
+where contract_id = 661;
+
+-- prin intermediul unei vizualizari se pot modifica liniile unui singur tabel.
+-------------------------------------------------------------------------------------------------
+
+--15
+--sa se afiseze pentru angajatii cu salariu mai mare de 1000 
+--si mai mic de 2500,id-ul si id-ul salonului la care lucreaza
+
+CREATE INDEX contract_ix
+   ON contract (angajat_id, salon_id, salariu);
+
+select angajat_id, salon_id, salariu
+from contract
+where salariu > 1000 and salariu <2500
+order by angajat_id, salon_id;
+
+--16
+
+--DIVISION
+--sa se afiseze angajatii care rezolva fix aceleasi servicii ca angajatul cu id = 11
+--(se va afisa si angajatul cu id 11)
+select distinct b.angajat_id from servicii b
+where not exists (
+    select angajat_id from servicii a
+    where a.angajat_id = 11 and not exists  (
+        select angajat_id from servicii c
+        where c.angajat_id =  b.angajat_id  and  c.denumire =  a.denumire
+    )
+);
+
+--sa se afiseze clientii care au fiz aceleasi observatii legate de sedinte ca cel cu id = 1
+--(se va afisa si angajatul cu id 1)
+select distinct b.client_id from sedinta b
+where not exists (
+    select client_id from sedinta a
+    where a.client_id = 1 and not exists  (
+        select client_id from sedinta c
+        where c.client_id =  b.client_id  and  c.observatii_sedinta =  a.observatii_sedinta
+    )
+);
+
+--OUTER JOIN
+-- sa se afiseze toti clientii(chiar daca au sau nu adresa) impreuna cu observatiile legate de factura
+-- orasul in care locuiesc si sedintele pe care le au
+
+select c.client_id, p.observatii, a.oras, s.sedinta_id
+from client c left outer join adresa a 
+on a.client_id = c.client_id
+join preferinte_factura p on a.client_id = p.client_id
+join sedinta s on a.client_id = s.client_id;
+
+
+
+
+
+
+

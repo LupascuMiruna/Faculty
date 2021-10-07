@@ -1,0 +1,167 @@
+
+#sectiune-galerie-animata{
+	padding-left: var(--padding-intern);/* variabila din css-ul general*/
+	padding-right: var(--padding-intern);
+	border: 15px solid transparent;
+	padding: 15px;
+	border-image-source: url(/images/border.png);
+	border-image-repeat: repeat;
+	border-image-slice: 30;
+	 
+	  
+}
+.galerie-a{
+	width:400px;
+	height:300px;
+	border:4px white;
+	position:relative;
+	overflow:hidden;
+	margin-bottom:5rem;
+}
+.galerie-a figcaption{
+	position:absolute;
+	bottom:0;
+	background:rgba(255,255,255,0.7);
+	width:100%;
+	text-align:center;
+}
+.galerie-a figure{
+	position:relative;
+	width:400px;
+	height:300px;
+}
+
+#grid-galerie-anim
+{
+    display: grid;
+    grid-template-columns: repeat($nr_cur_imag,1fr);
+
+    grid-gap: 2rem;
+    padding: var(--padding-intern);
+    border: black;
+    animation: mymove;
+    animation-iteration-count:infinite;
+    animation-timing-function:linear;
+    animation-direction:alternate;
+    animation-duration: $nr_cur_imag  *3;	
+}
+// p:nth-child(#{$a})
+
+@keyframes mymove{
+
+}
+#grid-galerie-anim:hover figure{
+    animation-play-state: paused;   
+}
+
+
+
+/*
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+
+#F1 { grid-area: f1; background: red;}
+#F2 { grid-area: f2; background: yellow;}
+#F3 { grid-area: f3; background: blue;}
+#F4 { grid-area: f4; background: aqua;}
+#F5 { grid-area: f5; background: black;}
+#F6 { grid-area: f6; background: orange;}
+#F7 { grid-area: f7; background: purple;}
+#F8 { grid-area: f8; background: green;}
+#F9 { grid-area: f9; background: brown;}
+
+#grid-galerie-anim
+{
+    display: grid;
+    grid-template-areas:'f1 f3 f2'
+                        'f7 f4 f5'
+                        'f9 f8 f6';
+
+grid-gap: 0rem;
+border: black;
+animation: crescendo 1.5s alternate infinite ease-in;
+animation-play-state: running;
+}
+#grid-galerie-anim:hover{
+animation-play-state: paused;
+}
+div {
+  width: 100px;
+  height: 100px;
+  
+  
+}
+
+@keyframes crescendo {
+   0%   {transform: scale(.8);
+   		transform: translateX(66%);
+        }
+       
+  
+   11.11{
+   transform: scale(1.8);
+   		transform: translateX(33%);
+   }
+   
+   22.22{
+   transform: scale(.8);
+   		transform: translateX(33%);
+        transform: translateY(33%);
+   }
+   33.33{
+   transform: scale(2.8);
+   	transform: translateX(66%);
+      transform: translateY(66%);
+   }
+   44.44{
+   transform: scale(.8);
+   	transform: translateX(66%);
+      transform: translateY(99%);
+   }
+   55.55{
+   	transform: translateX(0%);
+      transform: translateY(66%);
+   }
+   66.66{
+   	transform: translateX(66%);
+      transform: translateY(99%);
+   }
+   66.66{
+   	transform: translateX(0%);
+      transform: translateY(99%);
+   }
+   
+   
+   
+        
+  100% {transform: scale(1.5);}
+
+}
+#grid-galerie-anim: hover {
+  animation-play-state: paused;
+}
+
+</style>
+</head>
+<body>
+<div id="grid-galerie-anim">
+                <div id='F1'></div>
+                <div id='F2'></div>
+                <div id='F3'></div>
+                <div id='F4'></div>
+                <div id='F5'></div>
+                <div id='F6'></div>
+                <div id='F7'></div>
+                <div id='F8'></div>
+                <div id='F9'></div>
+</div>
+
+
+
+</body>
+</html>
+
+*/
+

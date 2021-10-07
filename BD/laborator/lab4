@@ -1,0 +1,125 @@
+select first_name, last_name, department_name 
+from employees e
+join departments d
+  on e.department_id = d.department_id;
+
+select first_name, last_name, department_name 
+from employees e, departments d
+where e.department_id = d.department_id;
+
+--toti angajatii chiar daca au sau nu departament
+select first_name, last_name, department_name
+from employees e 
+left join departments d
+  on e.department_id = d.department_id;
+  
+select first_name, last_name, department_name 
+from employees e, departments d
+where e.department_id = d.department_id (+);
+
+--toate departamentele chiar daca au sau nu angajati
+select first_name, last_name, department_name
+from employees e 
+right join departments d
+  on e.department_id = d.department_id;
+
+select first_name, last_name, department_name 
+from employees e, departments d
+where e.department_id (+) = d.department_id;
+  
+--toate departamentele si toti angajatii
+select first_name, last_name, department_name
+from employees e 
+full join departments d
+  on e.department_id = d.department_id;
+  
+--17
+select first_name, departments.department_id, department_name
+from employees
+left join departments 
+  on departments.department_id = employees.department_id;
+
+
+--18 Să se listeze codurile și denumirile job-urilor care 
+--există în departamentul 30.
+select j.job_id, job_title
+from jobs j
+join employees e on j.job_id = e.job_id
+where department_id = 30;
+
+--19
+select first_name, department_name, city
+from employees e
+join departments d 
+  on e.department_id = d.department_id
+join locations l
+  on d.location_id = l.location_id
+where commission_pct is not null;
+
+--20
+select first_name, department_name
+from employees e
+join departments d on e.department_id = d.department_id
+where lower(first_name) like '%a%';
+
+--21
+select first_name, job_title, department_name
+from employees e
+join departments d on e.department_id = d.department_id
+join jobs j on e.job_id = j.job_id
+join locations l on l.location_id = d.location_id
+where lower(city) = 'oxford';
+
+--22
+select ang.employee_id "Ang#", ang.first_name "Angajat",
+  mgr.employee_id "Mgr#", mgr.first_name "Manager"
+from employees ang
+join employees mgr on ang.manager_id = mgr.employee_id;
+
+--23
+select ang.employee_id "Ang#", ang.first_name "Angajat",
+  mgr.employee_id "Mgr#", mgr.first_name "Manager"
+from employees ang
+left join employees mgr on ang.manager_id = mgr.employee_id;
+
+
+select ang.employee_id "Ang#", ang.first_name "Angajat",
+  mgr.employee_id "Mgr#", mgr.first_name "Manager"
+from employees ang, employees mgr 
+where ang.manager_id = mgr.employee_id (+);
+
+--24
+select ang.first_name "Angajat", coleg.first_name "Coleg", 
+  ang.department_id "Departament"
+from employees ang
+join employees coleg
+  on ang.department_id = coleg.department_id 
+    and ang.employee_id != coleg.employee_id;
+    
+--25
+select ang.first_name, ang.job_id, j.job_title,
+  d.department_name, ang.salary
+from employees ang
+join jobs j on ang.job_id = j.job_id
+left join departments d on ang.department_id = d.department_id;
+
+select ang.first_name, ang.job_id, j.job_title,
+  d.department_name, ang.salary
+from employees ang, jobs j, departments d
+where ang.job_id = j.job_id
+ and ang.department_id = d.department_id (+);
+ 
+--26
+select ang.first_name, ang.hire_date 
+from employees ang
+join employees gates 
+  on ang.hire_date > gates.hire_date
+   and lower(gates.last_name) = 'gates';
+
+--27
+select ang.first_name "Angajat", ang.hire_date data_ang, 
+  mgr.first_name manager, mgr.hire_date data_mgr
+from employees ang
+join employees mgr 
+ on ang.manager_id = mgr.employee_id
+  and ang.hire_date < mgr.hire_date;

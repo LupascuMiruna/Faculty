@@ -1,0 +1,302 @@
+/*am setat font-size-ul radacinii, unitatile in rem vor fi relative la acest font-size*/
+html{
+  font-size: 16px;
+  
+}
+/*sau:root color: var(--blue);*/
+
+body{
+    --cremdesch:#FFE7C4;
+    --creminch:#D6C9B6;
+    --bleudesch: #DBEFFC;
+    --bleuinch: #829DAD;
+    --alb-galbui: #F9F4ED;
+    --bleumarin: #586A75;
+    --gradient-body: rgba(255,255,255,0.7);;
+
+    --body-padding:3rem;
+    --padding-intern:4%;
+
+    padding-left:var(--body-padding);
+    padding-right:var(--body-padding);
+    padding-top:0;
+    padding-bottom:0;
+    margin-top:0;
+    margin-bottom: 0;
+
+    counter-reset: figure;
+
+    /*imagini de backtound  linear-gradient(transparent, transparent 30%, white 50%, transparent 70%, transparent),*/
+    background-image: url("../images/paws.png");
+    /*background: no-repeat;*/
+    /*va ramane fix cand dam scroll*/
+    background-attachment: fixed;
+    background-size: cover;
+    /*nu permite body-ului sa se micsoreze mai mult de atat
+    deoarece pagina nu ar mai putea fi parcursa
+    trebuie mereu setata o latime minima pentru pagina
+    pentru a nu risca sa avem afisat cate un singur cuvant pe rand...*/
+    min-width:330px;/*latimea minima trebuie sa fie mai mica decat orice latime de dispozitiv pentru a nu avea scroll orizontal*/
+
+  }
+
+  body.dark{
+    --cremdesch:#F7DED5;
+    --creminch:#9396AB;
+    --bleudesch: #E2F7D5;
+    --bleuinch: #A0AB9A;
+    --alb-galbui: #EEEFF7;
+    --bleumarin: #7A8275;
+
+    
+    --gradient-body:rgba(184, 154, 38, 0.7);;
+    text-shadow:0px 0px 2px black,0px 0px 1px black,0px 0px 1px black;
+    
+   
+}
+main{
+  background:var(--gradient-body);
+  /*background:rgba(255,255,255,0.7);*/
+  
+  --main-border:1px solid var(--bleuinch);
+  border-left: var(--main-border);
+  border-right: var(--main-border);
+}
+ 
+h1{
+  font-size: 3rem;/*de 3 ori mai mare decat size ul radacinii*/
+  font-family: 'Architects Daughter', cursive;
+}
+
+/*STILIZARE BUTON TOP*/
+#circlee{
+  position: fixed;
+  /*top: 50%;
+  left 50%;*/
+  bottom: 0;
+  right:0;
+  transform: traslate(-50%, -50%);
+  width: 2rem;
+  height: 2rem;
+  border: 6px solid var(--bleumarin);
+  border-radius: 50%;
+  background-color: none;
+  opacity: 0.5;
+  border-bottom: none;
+  border-top: none;
+  text-align: center;
+  opacity: 0.5;
+  transition: opacity 500ms linear;
+  z-index: 30;
+}
+#circlee:hover {
+  opacity: 1;
+}  
+
+#circlee:hover>div {
+  transform: translateY(-30%);
+  opacity: 1;
+  
+}
+
+#arrow-upp{
+  text-decoration: none;
+  width: 0;
+  margin-top:10px;
+  height: 0;
+  border-left: 0.7rem solid transparent;
+  border-right: 0.7rem solid transparent;
+  border-bottom: 0.7rem solid var(--creminch);
+  vertical-align: middle;
+  display: inline-block;
+  opacity: 0.5;
+  transition: translateY 500ms linear;
+ }
+ 
+/*HR CU GRADIENT*/
+#grad-hr
+{
+  height:1vw;
+  background: repeating-linear-gradient(white, var(--bleuinch) 5%, var(--bleumarin)10%);
+  border-radius: 25px;
+}
+
+/*BANNER*/
+.banner
+{
+  width: 100%;
+  padding: 0;
+  left: 0px;
+  background-size: cover;
+  background-color:var(--cremdesc);
+  position: fixed;
+  animation-name: trans-banner;
+  animation-duration: 25s;
+  bottom:0px; 
+  visibility:hidden;
+  opacity: 0;
+  text-align: center;
+}
+@keyframes trans-banner{
+  0%   {bottom:-20px;visibility:visible;}
+  25%  {bottom:0px;visibility:visible;opacity: 1;}
+  50%  {bottom:20px; background-color:var(--creminch);opacity: 1;}
+  75%  {bottom:0px;visibility:visible;opacity: 1;}
+  100% {bottom:-20px;opacity: 1;}
+
+}
+
+
+/*TABURI IFRAME FLEXBOX*/
+.flex-coloane{
+  display: flex;
+  flex-direction: row;
+}
+.taburi-iframe {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0px;
+}
+
+.taburi-iframe a {
+  border: 2px solid var(--cremdesch);
+  border-left: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 70px;
+  padding: 0.2rem;
+  text-align: right;
+  align-items: center;
+  text-decoration: none;
+  background-image: linear-gradient(white, white 50%, var(--bleumarin));
+  color: var(--bleumarin);
+  transition:all 500ms linear;
+}
+.taburi-iframe a:hover{
+  background-color: var(--bleuinch); 
+  /*ca sa anulez ef gradient si sa se vada imaginea din spate*/
+  background-image: none;
+  color: var(--cremdesch);
+  width: 80px;
+  
+}
+
+ /*GRID*/
+#welcome { grid-area: i1; }
+#item2 { grid-area: i2; }
+#item3 { grid-area: i3; }
+#item4 { grid-area: i4; }
+#item5 { grid-area: i5; }
+#item6 { grid-area: i6; }
+#item7 { grid-area: i7; }
+#item8 { grid-area: i8; }
+
+ #grid-container {
+  display: grid;
+ 
+  grid-template-areas:'i1 i1 i1 i1'
+                      'i5 i6 i6 i7'
+                      'i3 i3 i2 i2'
+                      'i4 i4 i2 i2'
+                      'i8 i8 i8 i8';
+  
+  
+  /*spatiu intre celule grid*/
+  grid-gap: 2rem;
+  padding: var(--padding-intern);
+  border: black;
+}
+#grid-container section{
+  outline:1px solid var(--creminch);
+  padding:1rem;
+  }
+
+  /*TABEL*/
+#item2{
+  overflow-x: auto;
+  /*display: flex;
+  flex-direction: column;
+  align-items: center;*/
+  
+}
+
+#tab-orar{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  border-radius: 1.5rem;
+  border-width: 1px;
+  border-style:solid;
+ 
+  /*border: 5px solid #E8CAC1;*/
+  padding: 20px;
+
+}
+#tab-orar th, #tab-orar td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+tbody tr:hover td{
+  background-color: var(--creminch);  
+}
+td:nth-child(even)
+{
+  background-color: var(--cremdesch); 
+}
+
+thead{
+  color:var(--bleumarin);
+  
+}
+tbody{
+  color:black;
+  
+}
+tfoot{
+  color: var(--bleumarin);
+  
+}
+
+/*figuri*/
+figure{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+figure img{
+  width: 100%;
+}
+figcaption{
+  text-align: center;
+}
+figcaption::before{
+  counter-increment: figure;
+  content: "Poza " counter(figure);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.profile-img {
+  width: 10%;
+}
+
+
+footer{
+  background-color: var(--bleuinch);
+  padding-left:var(--padding-intern);
+  padding-right:var(--padding-intern);
+  padding-top: 1rem;
+  padding-bottom: 1 rem;     
+}
+/* width="560" height="315" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"*/
+#formatare_film {
+  width: 600;
+  height: 450;
+  
+
+}
+
+

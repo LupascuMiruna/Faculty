@@ -1,0 +1,141 @@
+--subcereri in where
+--  nr cunoscut de coloane returnate
+--  nr cunoscut randuri (trebuie sa stiu daca imi returneaza unu sau 
+--    mai multe)returnate
+--  pot fi corelate
+
+select first_name, last_name
+from employees e
+where (salary, department_id) in 
+    (select salary, department_id
+     from employees
+     where salary > 5000 and first_name <> e.first_name);
+
+--subcereri in select
+--  o singura coloana returnata
+--  un singur rand returnat
+--  pot fi corelate
+select first_name, 
+   (select last_name
+    from employees
+    where employee_id = e.employee_id)
+from employees e;
+
+--subcereri in from 
+--  nr necunoscut coloane returnate (oricate)
+--  nr necunoscut randuri returnate (oricate)
+--  nu pot fi corelate
+select e.first_name, a.abc
+from employees e
+join (select department_id, first_name abc
+      from employees
+      ) a
+  on e.department_id = a.department_id;
+  
+--1
+select department_name, j.job_title, round(avg(salary),2),
+  grouping(department_name), grouping(job_title)
+from departments d
+join employees e on e.department_id = d.department_id
+join jobs j on e.job_id = j.job_id
+group by rollup(department_name, j.job_title);
+
+--2
+select department_name, j.job_title, round(avg(salary),2),
+  case grouping(department_name) 
+        when 0 then 'Dep'
+        else ''
+  end ||
+  case grouping(job_title)
+      when 0 then ' Job'
+      else ''
+  end
+from departments d
+join employees e on e.department_id = d.department_id
+join jobs j on e.job_id = j.job_id
+group by cube(department_name, j.job_title);
+
+--3
+select department_name, job_title, e.manager_id, 
+  max(salary), sum(salary)
+from employees e
+join departments d on e.department_id = d.department_id
+join jobs j on j.job_id = e.job_id
+group by grouping sets((department_name, job_title), 
+  (job_title, e.manager_id), ());
+
+--4
+select max(salary) sal
+from employees
+having max(salary) >  15000;
+
+--where
+-- filtreaza randuri
+-- se realizeaza inainte de group by
+-- nu putem folosi functii agregat( de grup)
+-- putem folosi coloane care nu se afla in group  by
+--having
+-- filtreaza grupurile
+-- se realizeaza dupa de group by
+-- putem folosi functii agregat( de grup)
+-- nu putem folosi coloane care nu se afla in group  by
+
+
+--5
+--a
+select first_name, salary
+from employees ang_afis
+where salary > (--salariu mediu al colegilor
+                select avg(salary)
+                from employees e
+                where ang_afis.department_id = e.department_id);
+
+--b
+select first_name, salary, department_name, 
+    info.medie, info.numar
+from employees ang_afis
+join departments d on d.department_id =  ang_afis.department_id
+join (select department_id, avg(salary) medie,
+        count(employee_id) numar
+      from employees
+      group by department_id) info
+  on info.department_id = ang_afis.department_id
+where salary > (--salariu mediu al colegilor
+                select avg(salary)
+                from employees e
+                where ang_afis.department_id = e.department_id);
+                
+--6
+select last_name, salary
+from employees 
+where salary > ALL (select avg(e.salary)
+                from employees e
+                group by department_id);
+                
+select last_name, salary
+from employees 
+where salary > (select max(avg(e.salary))
+                from employees e
+                group by department_id);
+
+--7      
+--Gheorghe 200 DepA
+--Gica 100 DepA
+--Ion 2000 DepB
+--Mitica 200 DepB
+--
+--sal_min: 100 DepA, 200 DepB
+select first_name, salary
+from employees ang1
+where salary = (--cele mai mici salarii pe dep
+                select min(salary)
+                from employees ang
+                where ang.department_id = ang1.department_id);
+
+
+select first_name, salary
+from employees
+where (department_id, salary) = ANY (--cele mai mici salarii pe dep
+                select department_id, min(salary)
+                from employees ang
+                group by department_id);

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ro">
+<!--
+    formatare: ctr k + ctr f
+-->
+
+<!--
+   am adaugat watermark &galerie animata
+-->
+
+<head>
+
+    <meta name="keywords" content="caine, pisica, petshop">
+    <meta name="description" content="Pet Shop. Animalute, mancare si accesorii">
+    <title>PetMania</title>
+   
+    <%- include("../fragmente/head") %>
+
+        <!--font-family: 'Architects Daughter', cursive;-->
+</head>
+<!--class="fa fa-paw"
+            class="fa fa-trophy"
+            span class="fa fa-user-md"
+            -->
+
+<body>
+    <%- include("../fragmente/header") %>
+        <p id="watermark"></p>
+        <p id="absolute"></p>
+        <main>
+            <div id="grid-container">
+                <section id="welcome">
+                    <% if(!locals.user){ %>
+                        <section>
+                            <form id="login" method="post" action="/login">   
+                                <label>
+                                    <input type="text" name="username" value="" placeholder="Username">
+                                </label>
+                                <label>
+                                    <input type="password" name="parola" value="" placeholder="Parola">
+                                </label>
+                                <input type="submit" value="Login">
+                            </form>
+                        </section>
+                    <% } else { %>
+                        <% if(locals.user.imagine_profil && locals.user.imagine_profil !== ""){ %>
+                            <img src="<%- locals.user.imagine_profil %>" alt="" class="profile-img">
+                        <% } %>
+                    <% } %>
+
+                    <h2>Bine at venit!</h2>
+                    <p>Suntem aici pentru a va ajuta sa va gasiti cel mai bun prieten!</p>
+                    <p>Indecis ce animalut sa va luati?</p>
+                    <p>Suntem aici pentru a va oferi consilieri, cat si sedinte de dresaj!</p>
+
+                    <p>
+                        <q>Animalele își petrec viața, și-așa scurtă, așteptându-ne pe noi să ne întoarcem acasă</q> – John
+                        Grogan
+                    </p>
+                </section>
+
+                <section id="item2">
+                    <h2>Evenimente</h2>
+
+                    <table id="tab-orar">
+                        <thead>
+                            <tr>
+                                <th>Ore</th>
+                                <th>Luni</th>
+                                <th>Marti</th>
+                                <th>Miercuri</th>
+                                <th>Joi</th>
+                                <th>Vineri</th>
+                                <th>Sambata</th>
+                                <th>Duminica</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10:00-12:00</td>
+                                <td colspan="2">Expozitie Dalmatieni</td>
+                                <td colspan="2">Expozitie pisici Siameze</td>
+                                <td colspan="3">Expozitie Iepuri Pitici</td>
+                            </tr>
+                            <tr>
+                                <td>16:00-18:00</td>
+                                <td colspan="2">Expozitie bichon</td>
+                                <td colspan="2">Expozitie pisici Sfinx</td>
+                                <td colspan="3">Expozitie hamsteri</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="8">Aceasta este saptamana "Golden Retriever"</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </section>
+
+                <section id="item3">
+                    <h2>Calendar</h2>
+                    3Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque cum blanditiis dolorem reprehenderit
+                    mollitia, facilis cupiditate quis nobis et repellendus nemo officia autem praesentium ipsum atque architecto!
+                    Totam, impedit! Aut.
+                </section>
+                <section id="item4">
+                        <h2>Anunturi</h2>
+                    4Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit harum quidem, tenetur repellat eum ipsam
+                    aperiam voluptatem dolorem iusto pariatur distinctio impedit optio itaque, facilis delectus accusamus
+                    aspernatur id. Officiis!
+                </section>
+                <section id="item5">
+                    <h2>Utilizatori online</h2>
+                    <% for (let utilizator of locals.utilizatori_activi){ %>
+                        <%- utilizator.nume %>
+                    <% } %>
+                </section>
+                <section id="item6">
+                        <h2>Utilizator static</h2>
+                    <%- locals.ip %>
+                </section>
+                <section id="item7">
+                        <h2>Date despre site si server</h2>
+                    7Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad, voluptas, quam laboriosam quod corrupti, dolorem
+                    sapiente est dicta odio nemo vitae et? Asperiores rem beatae aspernatur velit quo ut debitis.</section>
+                <section id="item8">
+                    <div id="clip-video">
+                        <div id="stil-video">
+                            <video width="320" height="240" muted poster="/images/caine_pisica_iarba.png" controls preload="none">
+                                <source src="/video/Dog.mp4" type="video/mp4">
+                                <source src="/video/Dog.ogv" type="video/ogv">
+                                <track default src="/video/tracks/my_captions_dog.vtt"
+                                    kind="captions" srclang="ro" label="romana">
+                                <track src="/video/tracks/my_captions_dog_en.vtt"
+                                    kind="captions" srclang="en" label="engleza">
+                            </video>
+                        </div>
+                    </div>
+
+                    <section id="questions">
+                        <h2>Întreabă veterinarul</h2>
+                        <p>Vă prezentăm mai jos niște întrebări des întâlnite la propritarii de animăluțe:</p>
+                        <article>
+                            <h3>Câini</h3>
+                            <section>
+                                <h4>Cum previn obezitatea?</h4>
+                                <p>
+                                    <b>Medicul veterinar</b> joacă un rol important în ceea ce priveşte sănătatea animalului
+                                    tău de companie şi te poate ajuta să îi oferi companionului tău o alimentaţie corespunzătoare
+                                    pentru a preveni apariţia obezităţii. Mulţi proprietari de animale nu îşi cântăresc periodic
+                                    companionul, dar la fiecare vizită medicală, medicul curant va face acest lucru. În cazul
+                                    în care va observa variaţii mari de greutate îţi va oferi sfaturi bune cu privire la
+                                    o dietă potrivită pentru animalul tău de companie. Vă va ajuta în ați alege o
+                                    <b>hrană corespunzătoare</b>, dar te va sfătui şi în ceea ce privesc exerciţiile pe care
+                                    trebuie să le facă pentru a ajuge la greutatea optimă.
+                                </p>
+                            </section>
+
+                            <section>
+                                <h4>Are nevoie câinele tău de cizme pe timp de iarnă?</h4>
+                                <p>Chiar dacă nu le place să fie încălţaţi, pentru
+                                    <b>sănătatea</b> lor este bine ca în această perioadă cizmele să fie un accesoriu obligatoriu
+                                    pentru ei. Acestea sunt rezistente la apă, ceea ce face ca lăbuţele câinelui să rămână
+                                    calde şi în siguranţă tot timpul plimbării. Sunt concepute pentru a oferi protecţie indiferent
+                                    de cât este de accidentată zona prin care se plimbă sau aleargă.
+                                </p>
+                            </section>
+
+                        </article>
+                        <hr id="grad-hr">
+                        <article>
+                            <h3>Pisici</h3>
+                            <section>
+                                <h4>Cum pot să îmi dau seama că pisica mea are paraziți?</h4>
+                                <p>În caz de infestare cu paraziți interni,
+                                    <b>simptomele</b> sunt următoarele: întărzieri în creștere (cel mai des întâlnit la puii
+                                    de pisică), burta balonată, vomă, apatie, scaun deschis la culoare (galben), lipsa poftei
+                                    de mâncare. De aceea indicat este ca deparazitarea internă să se facă regulat, din 3
+                                    in 3 luni.
+                                </p>
+                            </section>
+                            <section>
+                                <h4>Are voie pisica mea să bea lapte?</h4>
+                                <p>Răspunsul este unul simplu. Da,
+                                    <b>pisica poate să consume lapte</b>, dar introducerea în meniu a acestui aliment nu trebuie
+                                    să se facă brusc şi în cantităţi mari.</p>
+
+                                <p>
+                                    <strong>Ţine minte!</strong> Moderaţia este cheia! De asemenea, este foarte important să întrebi
+                                    medicul veterinar oricând ai vreo preocupare în ceea ce privesc alimentele din dieta
+                                    pisicii tale. El va fi cel mai în măsură să îţi dea un răspuns bun şi folositor pentru
+                                    ca blănosul tău să ducă o viaţă sănătoasă şi fericită.
+                                </p>
+                            </section>
+
+                        </article>
+                    </section>
+
+            </div>
+
+            <section id="about">
+                <h2>Despre noi</h2>
+                <img src="/images/caine.png" alt="imagine caine" title="caine care zambeste" style="width:50%;" />
+                <p>Bazele acestui
+                    <b>Pet Shop</b> au fost puse in 1995 cand fondatorul, din dragostea sa pentru
+                    <b>animale</b>, s-a gandit sa ofere o mana de ajutor proprietarilor de
+                    <b>animalute</b>.</p>
+                <a href="https://fmi.unibuc.ro/" target="_blank">Sponsorii nostri!</a>
+                <details>
+                    <summary>Program</summary>
+                    <ul>
+                        <li>Luni - Vineri: 10:00 - 21:00</li>
+                        <li>Sambata - Duminica: 12:00 - 19:00</li>
+                    </ul>
+                </details>
+            </section>
+            <section id="shop">
+                <h2>Online Shop</h2>
+                
+                <figure class="fg-img">
+                    <img src="/images/iepure_ureche.png" alt="imagine iepure" title="Va asteapta sa fiti prieteni" style="width:50%;">
+                    <figcaption></figcaption>
+                </figure>
+                <figure class="fg-img">
+                    <img src="/images/pets_roz.png" alt="imagine pets" title="Va asteapta sa fiti prieteni" style="width:50%;">
+                    <figcaption></figcaption>
+                </figure>
+            </section>
+
+            <section id="oferte">
+                <h2>Oferte</h2>
+
+                <details>
+                    <summary>Top oferte</summary>
+
+                    <ol>
+                        <li>Reducere 30% la custile de catei</li>
+                        <li>2 + 1 la sacii de 10kg de mancare pentru pisici</li>
+                        <li>Cupon de 10 lei la fiecare achizitie de cel putin 100 de lei </li>
+                    </ol>
+                </details>
+            </section>
+            <section id="film">
+                <h2>Filmuletele lunii</h2>
+                <div class="flex-coloane">
+                    <iframe name="ifr" width="600" height="450" src="https://www.youtube.com/embed/28xjtYY3V3Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="taburi-iframe">
+                        <a href="https://www.youtube.com/embed/28xjtYY3V3Q" target="ifr">Filmulet 1</a>
+                        <a href="https://www.youtube.com/embed/X2lIovmNsUY" target="ifr">Filmulet 2</a>
+                    </div>
+                </div>
+            </section>
+
+            
+            <%- include("../fragmente/galerie") %>
+
+
+            <section>
+
+                <iframe class="full-width" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11392.437171642094!2d26.0854831!3d44.4514301!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe30589afe76d9676!2sMega%20Image!5e0!3m2!1sro!2sro!4v1615112851255!5m2!1sro!2sro"></iframe>
+            </section>
+           
+            <div class="banner"  >Acesta este un proiect scolar!</div>
+            
+        </main>
+
+
+        <%- include("../fragmente/footer") %>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+@use 'sass:list'
+@use 'sass: math'
+$lista_nr_imag(4, 9, 16);
+$nr_cur_imag: math.random(list.length($lista_nr_imag));
+
+@use '../resurse/scss/galeire_animata_frag' with(
+    
+)

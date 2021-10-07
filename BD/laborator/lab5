@@ -1,0 +1,151 @@
+--1
+select ang.first_name, to_char(ang.hire_date, 'MONTH YYYY')
+from employees ang
+join employees gates
+  on lower(gates.last_name) = 'gates'
+  and gates.department_id = ang.department_id
+where lower(ang.last_name) like '%a%';
+
+select ang.first_name, to_char(ang.hire_date, 'MONTH YYYY')
+from employees ang
+join employees gates
+  on lower(gates.last_name) = 'gates'
+  and gates.department_id = ang.department_id
+where instr(lower(ang.last_name), 'a') <> 0;
+
+select ang.first_name, to_char(ang.hire_date, 'MONTH YYYY')
+from employees ang, employees gates
+where lower(gates.last_name) = 'gates'
+  and gates.department_id = ang.department_id
+  and instr(lower(ang.last_name), 'a') <> 0;
+  
+--2
+select distinct ang.employee_id, ang.last_name, 
+  angt.department_id, dep.department_name
+from employees ang, employees angt, departments dep
+where angt.department_id = ang.department_id
+  and angt.department_id = dep.department_id
+  and instr(lower(angt.last_name), 't') <> 0
+order by ang.last_name;
+
+select distinct ang.employee_id, ang.last_name, 
+  angt.department_id, dep.department_name
+from employees ang, employees angt
+join departments dep
+  on angt.department_id = dep.department_id
+where angt.department_id = ang.department_id
+  and instr(lower(angt.last_name), 't') <> 0
+order by ang.last_name;
+
+--3 
+select ang.first_name, ang.salary, job.job_title,
+  loc.city, co.country_name
+from employees ang
+join employees mgr 
+  on ang.manager_id = mgr.employee_id
+  and lower(mgr.last_name) = 'king'
+join departments dep 
+  on dep.department_id = ang.department_id
+join locations loc on loc.location_id = dep.location_id
+join countries co on co.country_id = loc.country_id
+join jobs job on ang.job_id = job.job_id;
+
+select ang.first_name, ang.salary, job.job_title,
+  loc.city, co.country_name
+from employees ang, employees mgr, departments dep,
+  locations loc, countries co, jobs job 
+where ang.manager_id = mgr.employee_id
+  and dep.department_id = ang.department_id
+  and loc.location_id = dep.location_id
+  and co.country_id = loc.country_id
+  and ang.job_id = job.job_id
+  and lower(mgr.last_name) = 'king';
+  
+--4
+select dep.department_id, dep.department_name, ang.last_name,
+  ang.job_id,to_char(ang.salary, '$99,999.00') salariu
+from employees ang
+join departments dep on ang.department_id = dep.department_id
+where instr(lower(dep.department_name), 'ti') <> 0
+order by dep.department_name, ang.last_name;
+
+--5
+select ang.last_name, dep.department_id,
+  dep.department_name, loc.city, ang.job_id
+from employees ang
+join departments dep
+  on dep.department_id = ang.department_id
+join locations loc 
+  on dep.location_id = loc.location_id
+where lower(loc.city) = 'oxford';
+
+--6
+select distinct ang.employee_id, 
+  ang.last_name, ang.salary,
+  angt.department_id, dep.department_name
+from employees ang, employees angt, 
+  departments dep, jobs job
+where angt.department_id = ang.department_id
+  and angt.department_id = dep.department_id
+  and ang.job_id = job.job_id
+  and instr(lower(angt.last_name), 't') <> 0
+  and ang.salary > 
+    (job.min_salary + job.max_salary) / 2
+order by ang.last_name;
+
+--7
+select ang.last_name, dep.department_name
+from employees ang 
+left join departments dep
+  on ang.department_id = dep.department_id;
+
+select ang.last_name, dep.department_name
+from departments dep  
+right join employees ang
+  on ang.department_id = dep.department_id;
+
+select ang.last_name, dep.department_name
+from departments dep, employees ang
+where  ang.department_id = dep.department_id (+);
+
+--9
+select ang.first_name, dep.department_name
+from employees ang 
+right join departments dep
+  on dep.department_id = ang.department_id;
+
+select ang.first_name, dep.department_name
+from  departments dep
+left join  employees ang
+  on dep.department_id = ang.department_id;
+
+select ang.first_name, dep.department_name
+from  departments dep,  employees ang
+where dep.department_id = ang.department_id (+);
+
+--10
+select ang.first_name, dep.department_name
+from  departments dep
+full join  employees ang
+  on dep.department_id = ang.department_id;
+
+
+--sa se afiseze codul si numele 
+--departamentului unde exista anagajati 
+--care castiga comision
+select dep.department_id, dep.department_name
+from departments dep
+left join employees emp
+  on dep.department_id = emp.department_id
+where emp.commission_pct IS not NULL;
+
+
+--afisati toti angatii si numele departamentului
+--pentru cei ce au litera e in nume
+
+select first_name, department_name
+from employees e
+left join departments d
+  on d.department_id = e.department_id
+where lower(first_name) like '%e%';
+

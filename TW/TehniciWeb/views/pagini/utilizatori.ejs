@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+    <meta name="keywords" content="caine, pisica, petshop">
+    <meta name="description" content="Pet Shop. Animalute, mancare si accesorii">
+    <title>PetMania</title>
+    <%- include("../fragmente/head") %>
+    <script type="text/javascript" src=/js/utilizatori.js></script>
+
+</head>
+
+
+<body>
+    <%- include("../fragmente/header") %>
+
+    <table style="width:100%">
+        <tr>
+            <th>Username</th>
+            <th>Nume</th>
+            <th>Rol</th>
+            <th>Actiune</th>
+        </tr>
+        <% for (let utilizator of locals.utilizatori){  %>
+            <tr>
+                <td><%- utilizator.username %></td>
+                <td><%- utilizator.nume %></td>
+                <td id="rol-<%- utilizator.id %>"><%- utilizator.rol %></td>
+                <td>
+                    <% if(utilizator.rol === "admin") { %>
+                        <button id="<%- utilizator.id %>" data-role="comun" onclick="changeRole(this)">
+                            Retrogradează
+                        </button>
+                    <% } else { %>
+                        <button id="<%- utilizator.id %>" data-role="admin" onclick="changeRole(this)">
+                            Promovează
+                        </button>
+                    <% } %>
+                </td>
+            </tr>
+        <% } %>
+    </table>
+
+    <%- include("../fragmente/footer") %>
+</body>
+
+
+
+</html>

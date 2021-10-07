@@ -1,0 +1,70 @@
+desc employees;
+
+select distinct commission_pct
+from employees;
+
+--4
+select * 
+from job_history;
+
+--5
+select employee_id, first_name, job_id, hire_date
+from employees;
+
+--6
+select distinct job_id
+from employees;
+
+--7 str1 || str2
+select first_name || ', ' || job_id "Angajat_si_titlu"
+from employees;
+
+--8
+select last_name, salary
+from employees
+where salary > 2850;
+
+--9
+select first_name, department_id
+from employees
+where employee_id = 104;
+
+--10
+select last_name, salary
+from employees
+where salary < 1500 or salary > 2850;
+
+select last_name, salary
+from employees
+where salary not between 1500 and 2850;
+
+--11
+select last_name, job_id, hire_date
+from employees
+where hire_date between '20-FEB-1987' and '1-MAY-1989'
+order by hire_date;
+
+--12
+select last_name, department_id
+from employees
+where department_id in (10,30)
+order by last_name;
+
+select last_name, department_id
+from employees
+where department_id=10 or department_id=30
+order by last_name;
+
+--13
+select last_name as Angajat, salary as salariu_lunar
+from employees
+where salary > 1500 and department_id in (10,30);
+
+--14
+select to_char(sysdate, 'D DY MI HH12 SS')
+from dual;
+
+--15
+select first_name
+from employees
+where first_name like 'a%';

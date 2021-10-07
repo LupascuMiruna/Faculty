@@ -1,0 +1,17 @@
+html{
+    font-size:11px;
+}
+body{
+    --body-padding:0px;
+}
+#grid-container{
+    display: block;
+}
+.taburi-iframe a{
+    display: none;
+    width: 75px;
+}
+#grid-galerie-anim
+{
+    display: none;
+}
