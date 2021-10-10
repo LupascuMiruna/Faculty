@@ -1,0 +1,33 @@
+{
+  "name": "tehniciweb",
+  "version": "1.0.0",
+  "description": "Site pentru petshop-ul PetMania",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "formidable": "^1.2.2",
+    "html-pdf-node": "^1.0.7",
+    "nodemailer": "^6.6.0",
+    "pg": "^8.5.1",
+    "request": "^2.88.2",
+    "sharp": "^0.27.2",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.7"
+  },
+  "keywords": [
+    "animale",
+    "petshop"
+  ],
+  "scripts": {
+    "hmr": "nodemon index.js",
+    "server": "npm run hmr",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lupascu Miruna-Stefania",
+  "license": "ISC"
+}
