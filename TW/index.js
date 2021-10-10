@@ -87,7 +87,7 @@ async function trimitefactura(username, email, numefis) {
         secure: false,
         auth: {//date login 
             user: "tehniciweb2001@gmail.com",
-            pass: "TehniciWeb2001!"
+            pass: process.env.EMAIL_PASSWORD,
         },
         tls: {
             rejectUnauthorized: false
