@@ -1,2 +1,2 @@
-# Databases Project
-- SQL
+# Data Base Project
+- MySQL
